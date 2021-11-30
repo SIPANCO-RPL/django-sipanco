@@ -7,5 +7,11 @@ def lihat_rumah_sakit(request):
 def lihat_jadwal_dokter(request):
     return render(request, 'jadwal_dokter.html')
 
+def lihat_ruangan(request):
+    return render(request, 'list_ruangan.html')
+
 def create_jadwal_dokter(request):
     return render(request, 'create_jadwal_dokter.html')
+
+def create_ruangan(request):
+    return render(request, 'create_ruangan.html')
