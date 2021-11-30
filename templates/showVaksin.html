@@ -1,0 +1,41 @@
+{% extends "common/base.html" %}
+{% block content %}
+    <title>Jadwal Vaksin | SIPANCO</title>
+    <div class="container" >
+        <h3 class="d-flex justify-content-center">List Jadwal Vaksin</h3>
+    </div>
+    <br></br>
+    <div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Tanggal</th>
+            <th scope="col">Waktu</th>
+            <th scope="col">Kuota</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>12/13/2021</td>
+            <td>11:11 PM</td>
+            <td>10</td>
+            <td>
+                <button type="submit" class="btn btn-outline-warning">Reservasi Jadwal</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>12/13/2021</td>
+            <td>11:11 PM</td>
+            <td>10</td>
+            <td>
+                <button type="submit" class="btn btn-outline-warning">Reservasi Jadwal</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+{% endblock content %}
