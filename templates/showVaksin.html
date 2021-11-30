@@ -1,11 +1,13 @@
 {% extends "common/base.html" %}
 {% block content %}
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Jadwal Vaksin | SIPANCO</title>
-    <div class="container" >
-        <h3 class="d-flex justify-content-center">List Jadwal Vaksin</h3>
-    </div>
-    <br></br>
-    <div class="container">
+    <div class="container mx-auto mt-32" style="max-width: 768px;">
+        <div class="flex flex-col items-center md:items-start">
+            <h1 class="mb-2 text-3xl sm:text-4xl">List Jadwal Vaksin</h1>
+            <div class="w-1/12 bg-red-500 px-3 h-1 rounded-xl" />
+        </div>
+    <div class="container mx-auto mt-20">
     <table class="table">
         <thead>
         <tr>
@@ -23,7 +25,7 @@
             <td>11:11 PM</td>
             <td>10</td>
             <td>
-                <button type="submit" class="btn btn-outline-warning">Reservasi Jadwal</button>
+                <button type="submit" class="btn btn-outline-danger">Reservasi Jadwal</button>
             </td>
         </tr>
         <tr>
@@ -32,7 +34,7 @@
             <td>11:11 PM</td>
             <td>10</td>
             <td>
-                <button type="submit" class="btn btn-outline-warning">Reservasi Jadwal</button>
+                <button type="submit" class="btn btn-outline-danger">Reservasi Jadwal</button>
             </td>
         </tr>
         </tbody>
