@@ -1,0 +1,36 @@
+{% extends "common/base.html" %}  
+{% block content %}  
+    <div class="container-fluid">
+        <h2 style="text-align: center; margin-top: 50px;">Appointment Dokter</h2>
+        <div class="row justify-content-center">
+            <div class= "col-9 col-sm-5 col-md-3">
+                <form class="form-container" method="POST">
+                    <label for="exampleInputPassword1" class="form-label" style="font-weight: 600;">Keluhan:</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Tulis keluhan yang Anda rasakan disini">
+                    <br>
+                  <button type="submit" class="btn btn-success btn-block">Submit</button>
+                  <button type="submit" class="btn btn-danger btn-block">Cancel</button>
+                    
+                </form>
+            </div>
+        </div>   
+    </div>
+    <style>
+        .form-control{
+            height: 100px;
+            width: 350px;
+        }
+        .form-container{
+            position:absolute;
+            margin-top: 34px;
+            margin-left: -61px;
+            /* top: 23vh; */
+            /* background: rgb(247, 246, 244); */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #000;
+        }
+        
+    </style>
+    
+{% endblock content %}
