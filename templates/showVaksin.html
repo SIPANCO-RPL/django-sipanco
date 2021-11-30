@@ -1,20 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-          crossorigin="anonymous">
-    <title>Lihat Jadwal Vaksin</title>
-</head>
-<body>
-<h1>Belom ada bos</h1>
-</table>
-</body>
-</html>
+{% extends "common/base.html" %}
+{% block content %}
+<title>Lihat Jadwal Vaksin</title>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Dokter</th>
+            <th scope="col">Spesialis</th>
+            <th scope="col">Jadwal</th>
+            <th scope="col">Keluhan</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Dr. Mark</td>
+            <td>Anak</td>
+            <td>Senin, 16 September 2021 20.00 - 21.00</td>
+            <td>Sakit perut</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Dr. Yusuf</td>
+            <td>Mata</td>
+            <td>Selasa, 17 September 2021 17.00 - 19.00</td>
+            <td>Mata buram</td>
+        </tr>
+        <tr>
+            <th scope="row">4</th>
+            <td>Drg. Anna</td>
+            <td>Gigi</td>
+            <td>Sabtu, 25 Desember 2021 09.00 - 11.00</td>
+            <td>Sakit gigi</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock content %}
