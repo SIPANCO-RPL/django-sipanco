@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn projectfolder.wsgi --log-file -
+web: gunicorn sipanco.wsgi --log-file -

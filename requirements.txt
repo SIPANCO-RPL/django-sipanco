@@ -25,3 +25,7 @@ trio-websocket==0.9.2
 urllib3==1.26.7
 whitenoise==5.3.0
 wsproto==1.0.0
+
+# addition
+djangorestframework==3.12.4
+injector==0.18.4
