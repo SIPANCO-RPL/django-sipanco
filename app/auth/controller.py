@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from sipanco.di import injector
-from .service import ILoginService
+from app.di import injector
+from .service import ILoginService, A
 from django.views.decorators.http import require_http_methods as methods
 
 
 login_service = injector.get(ILoginService)
+a = injector.get(A)
 
 @methods(["GET"])
 def index(request):
     print(login_service.test())
+    print(a.test())
     return render(request, 'index.html')
