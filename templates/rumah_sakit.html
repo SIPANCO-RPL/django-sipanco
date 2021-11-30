@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'index.css' %}">
-    <title>Django Landing Page</title>
-</head>
-<body>
-    <h1>Rumah Sakit</h1>
-</body>
-</html>
+{% extends 'common/base.html' %}
+{% block title %} Rumah Sakit | SIPANCO {% endblock title %}
+
+{% block content %}
+    <div>
+        <h1>Tes Extend</h1>
+    </div>
+{% endblock content %}
