@@ -1,176 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
-  <meta charset="UTF-8" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-          crossorigin="anonymous">
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <style>
- a {
-  font-size: 1.1em;
-  color: #1a1a33;
-}
+    a {
+      font-size: 1.1em;
+      color: #1a1a33;
+    }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
 
-.dropdown-content a {
-  color: black;
-  padding: 10px 16px;
-  text-decoration: none;
-  display: block;
-}
+    .dropdown-content a {
+      color: black;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+    }
 
-.dropdown-content a:hover {
-  background-color: #fddde1;
-}
+    .dropdown-content a:hover {
+      background-color: #fddde1;
+    }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
 
-.nav-item:last-child {
-  padding-right: 10.5em;
-}
+    .nav-item:last-child {
+      padding-right: 10.5em;
+    }
 
-.nav-item {
-  padding: 0.9em;
-}
+    .nav-item {
+      padding: 0.9em;
+    }
 
-.navbar-brand {
-  padding-left: 8rem;
-  font-size: 1.8em;
-  color: #e9544c;
-  font-weight: 700;
-  text-shadow: 1px 1px #ffffff;
-}
+    .navbar-brand {
+      padding-left: 8rem;
+      font-size: 1.8em;
+      color: #e9544c;
+      font-weight: 700;
+      text-shadow: 1px 1px #ffffff;
+    }
 
-.nav-link:hover {
-  color: black;
-}
+    .nav-link:hover {
+      color: black;
+    }
 
-footer {
-  background: #931f17;
-  padding: 5vmin 2vmin;
-  left: 0;
-  display: block;
-  bottom: 0;
-  width: 100%;
-}
+    footer {
+      background: #931f17;
+      padding: 5vmin 2vmin;
+      left: 0;
+      display: block;
+      bottom: 0;
+      width: 100%;
+    }
 
-footer p {
-  color: #ffffff;
-}
+    footer p {
+      color: #ffffff;
+    }
 
 
-footer i {
-  color: #f1f1f1;
-  size: 2em;
-  letter-spacing: 0.5em;
-  padding-bottom: 2em;
-  
-}
-@media only screen and (max-width: 768px) {
-  .navbar-brand {
-    padding-left: 1rem;
-    font-size: 1.3rem;
-  }
-  header a{
-  font-size: 0.8em;
-}
-  footer .row {
-    font-size: 0.7em;
-    
-  }
-  footer i{
-    padding-bottom: 3em;
-  }
+    footer i {
+      color: #f1f1f1;
+      size: 2em;
+      letter-spacing: 0.5em;
+      padding-bottom: 2em;
 
-  #scroll{
-    font-size: 0.6em;
-  }
-}
-  </style> 
+    }
+
+    @media only screen and (max-width: 768px) {
+      .navbar-brand {
+        padding-left: 1rem;
+        font-size: 1.3rem;
+      }
+
+      header a {
+        font-size: 0.8em;
+      }
+
+      footer .row {
+        font-size: 0.7em;
+
+      }
+
+      footer i {
+        padding-bottom: 3em;
+      }
+
+      #scroll {
+        font-size: 0.6em;
+      }
+    }
+
+    #navbar {
+      min-width: 100vw;
+      margin-bottom: 50px;
+      position: fixed;
+      top: 0;
+      z-index: 10;
+      /* background-color: white; */
+      background: rgba(255, 255, 255, 0.50);
+      box-shadow: 0 4px 20px -7px rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(7.0px);
+      -webkit-backdrop-filter: blur(7.0px);
+    }
+
+    #glassM {
+      background: rgba(255, 255, 255, 0.50);
+      box-shadow: 0 4px 20px -7px rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(7.0px);
+      -webkit-backdrop-filter: blur(7.0px);
+      /* border-radius: 10px; */
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    #decoration {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: -1;
+    }
+  </style>
   {% block style %}
   {% endblock style %}
-  </head>
-  <body>
-      <header>
-        <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg ">
-          <a class="navbar-brand" href="#">SIPANCO</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="mr-auto"></div>
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <div class="dropdown">
-                  <a href="" class="nav-link">Rumah Sakit</a>
-                  <div class="dropdown-content">
-                    <a href=""></a>
-                    <a href=""></a>
-                  </div>
+</head>
+
+<body>
+  <img src="{% static 'img/leftside.png' %}" alt="" id="decoration">
+  <header id="navbar">
+    <div class="container-fluid p-0">
+      <nav class="navbar navbar-expand-lg ">
+        <a class="navbar-brand" href="#">SIPANCO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="mr-auto"></div>
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <a href="" class="nav-link">Rumah Sakit</a>
+                <div class="dropdown-content">
+                  <a href="">List Rumah Sakit</a>
+                  <a href="">Tambah Rumah Sakit</a>
                 </div>
-              </li>
-              <li class="nav-item dropdown">
-                <div class="dropdown">
-                  <a href="}" class="nav-link">Dokter</a>
-                  <div class="dropdown-content">
-                    <a href="">Melihat Jadwal Dokter</a>
-                    <a href="">Membuat Jadwal Dokter</a>
-                    <a href="/appointment/createappointment">Melihat Appointment Dokter</a>
-                  </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <a href="}" class="nav-link">Dokter</a>
+                <div class="dropdown-content">
+                  <a href="">Melihat Jadwal Dokter</a>
+                  <a href="">Membuat Jadwal Dokter</a>
+                  <a href="/appointment/createappointment">Melihat Appointment Dokter</a>
                 </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Pesan</a>
-              </li>
-              {% block auth%}
-              {%if user.is_authenticated%}
-              <li class="nav-item dropdown">
-                <div class="dropdown">
-                  <a href="" class="nav-link" style="background-color: #ed443b; border-radius: 2em; color: #ffffff; padding-left: 2em; padding-right: 2em; font-weight: 700;">Hi, {{request.user}}</a>
-                  <div class="dropdown-content">
-                    <a href="">Logout</a>
-                  </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <a href="}" class="nav-link">Vaksin</a>
+                <div class="dropdown-content">
+                  <a href="">Jadwal Vaksin Saya</a>
+                  <a href="">Tambah Jadwal Vaksin</a>
+                  <a href="">Lihat Jadwal Vaksin</a>
+                  <a href="/appointment/createappointment">Reservasi Jadwal Vaksin</a>
                 </div>
-              </li>
-              <!-- <li class="nav-item"> -->
-                <!-- <a class="nav-link" href="{% url 'login:logout'%}">Logout</a> -->
-              <!-- </li> -->
-              {%else%}
-              <li class="nav-item">
-                <a class="nav-link" href="">Login</a>
-              </li>
-              {%endif%}
-              {%endblock auth%}
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    {% block content %} 
-    {% endblock content %} 
+              </div>
+            </li>
+            {% block auth%}
+            {%if user.is_authenticated%}
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <a href="" class="nav-link"
+                  style="background-color: #ed443b; border-radius: 2em; color: #ffffff; padding-left: 2em; padding-right: 2em; font-weight: 700;">Hi,
+                  {{request.user}}</a>
+                <div class="dropdown-content">
+                  <a href="">Logout</a>
+                </div>
+              </div>
+            </li>
+            <!-- <li class="nav-item"> -->
+            <!-- <a class="nav-link" href="{% url 'login:logout'%}">Logout</a> -->
+            <!-- </li> -->
+            {%else%}
+            <li class="nav-item">
+              <a class="nav-link" href="">Login</a>
+            </li>
+            {%endif%}
+            {%endblock auth%}
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  {% block content %}
+  {% endblock content %}
 </body>
