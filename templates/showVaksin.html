@@ -1,38 +1,41 @@
 {% extends "common/base.html" %}
 {% block content %}
-<title>Lihat Jadwal Vaksin</title>
+    <title>Jadwal Vaksin | SIPANCO</title>
+    <div class="container" >
+        <h3 class="d-flex justify-content-center">List Jadwal Vaksin</h3>
+    </div>
+    <br></br>
+    <div class="container">
     <table class="table">
         <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Dokter</th>
-            <th scope="col">Spesialis</th>
-            <th scope="col">Jadwal</th>
-            <th scope="col">Keluhan</th>
+            <th scope="col">Tanggal</th>
+            <th scope="col">Waktu</th>
+            <th scope="col">Kuota</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <th scope="row">1</th>
-            <td>Dr. Mark</td>
-            <td>Anak</td>
-            <td>Senin, 16 September 2021 20.00 - 21.00</td>
-            <td>Sakit perut</td>
+            <td>12/13/2021</td>
+            <td>11:11 PM</td>
+            <td>10</td>
+            <td>
+                <button type="submit" class="btn btn-outline-warning">Reservasi Jadwal</button>
+            </td>
         </tr>
         <tr>
             <th scope="row">2</th>
-            <td>Dr. Yusuf</td>
-            <td>Mata</td>
-            <td>Selasa, 17 September 2021 17.00 - 19.00</td>
-            <td>Mata buram</td>
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-            <td>Drg. Anna</td>
-            <td>Gigi</td>
-            <td>Sabtu, 25 Desember 2021 09.00 - 11.00</td>
-            <td>Sakit gigi</td>
+            <td>12/13/2021</td>
+            <td>11:11 PM</td>
+            <td>10</td>
+            <td>
+                <button type="submit" class="btn btn-outline-warning">Reservasi Jadwal</button>
+            </td>
         </tr>
         </tbody>
     </table>
+    </div>
 {% endblock content %}
