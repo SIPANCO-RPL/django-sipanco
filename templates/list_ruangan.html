@@ -1,0 +1,51 @@
+{% extends "common/base.html" %}  
+
+{% load static %}
+
+{% block style %}
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<title>Daftar Ruangan | SIPANCO</title>
+{% endblock style %}
+
+{% block content %}  
+<div class="container mx-auto mt-32" style="max-width: 768px;">
+  <div class="flex flex-col items-center md:items-start mb-8">
+      <h1 class="mb-2 text-3xl sm:text-4xl">Daftar Ruangan</h1>
+      <div class="w-1/6 bg-red-500 px-3 h-1 rounded-xl" />
+  </div>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Nama Rumah Sakit</th>
+      <th scope="col">Kode Ruangan</th>
+      <th scope="col">Kapasitas Total</th>
+      <th scope="col">Kapasitas Tersedia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>RSUI</td>
+      <td>R.2404</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>RSUI</td>
+      <td>R.2405</td>
+      <td>4</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>RSU Fatmawati</td>
+      <td>B12</td>
+      <td>6</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock content %}
