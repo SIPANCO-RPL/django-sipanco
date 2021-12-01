@@ -1,0 +1,23 @@
+<svg width="268" height="258" viewBox="0 0 268 258" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M265 27V231C265 244.255 254.255 255 241 255H27C13.7452 255 3 244.255 3 231V27C3 13.7452 13.7452 3 27 3H134H241C254.255 3 265 13.7452 265 27Z" fill="white" stroke="#D73A2F" stroke-width="6"/>
+<circle cx="176.5" cy="75.5" r="10.5" fill="#931F17"/>
+<circle cx="202.5" cy="75.5" r="10.5" fill="#D73A2F"/>
+<rect x="140" y="174" width="20" height="20" fill="#BA78DA"/>
+<rect x="166" y="144" width="24" height="24" rx="12" fill="#931F17"/>
+<rect x="192" y="91" width="22" height="22" rx="11" fill="#931F17"/>
+<rect x="97" y="64" width="64" height="24" fill="#D73A2F"/>
+<rect x="166" y="116" width="24" height="24" rx="12" fill="#D73A2F"/>
+<rect x="95" y="90" width="50" height="24" transform="rotate(90 95 90)" fill="#D73A2F"/>
+<rect x="95" y="64" width="28" height="24" transform="rotate(90 95 64)" fill="#D73A2F"/>
+<rect x="161" y="144" width="51" height="20" transform="rotate(90 161 144)" fill="#D73A2F"/>
+<rect x="95" y="116" width="66" height="24" fill="#D73A2F"/>
+<rect x="71" y="171" width="90" height="24" fill="#D73A2F"/>
+<rect width="167" height="4" transform="matrix(1 0 0 -1 36 78)" fill="white"/>
+<rect width="46.7583" height="3.7531" transform="matrix(0.00670128 0.999978 0.999978 -0.00670128 175.17 127.001)" fill="white"/>
+<rect width="39.3403" height="3.25213" transform="matrix(-0.73047 0.682945 0.682945 0.73047 203.875 100.271)" fill="white"/>
+<rect width="39.3098" height="2.66922" transform="matrix(-0.693611 0.72035 0.72035 0.693611 126.596 112)" fill="white"/>
+<rect width="39.3098" height="2.66922" transform="matrix(-0.693611 0.72035 0.72035 0.693611 132.266 113)" fill="white"/>
+<rect width="39.3098" height="2.66922" transform="matrix(-0.693611 0.72035 0.72035 0.693611 138.266 114)" fill="white"/>
+<rect width="39.3098" height="2.66922" transform="matrix(-0.693611 0.72035 0.72035 0.693611 145.266 114)" fill="white"/>
+<rect width="28.8883" height="4" transform="matrix(-0.00594539 0.999982 0.999982 0.00594539 202.242 74)" fill="white"/>
+</svg>
