@@ -1,7 +1,7 @@
 
 
 
-class AppointmentAccessor:
+class RumahSakitAccessor:
     def __init__(self) -> None:
         pass
 
