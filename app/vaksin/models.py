@@ -1,9 +1,12 @@
 from django.db import models
 from app.auth.models import Pasien
+from app.rumah_sakit.models import RumahSakit
+
 
 class JadwalVaksin(models.Model):
     waktu = models.DateTimeField()
     kuota = models.PositiveIntegerField()
+    rumah_sakit = models.ForeignKey(RumahSakit)
 
 
 class ReservasiVaksin(models.Model):
