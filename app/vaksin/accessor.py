@@ -1,15 +1,9 @@
-from abc import ABC, abstractmethod
 
 
-# class ILoginAccessor(ABC):
-#     @abstractmethod
-#     def index(self):
-#         pass
 
+class VaksinAccessor:
+    def __init__(self) -> None:
+        pass
 
-# class LoginAccessor(ILoginAccessor):
-#     def __init__(self) -> None:
-#         pass
-
-#     def login(self):
-#         pass
+    def login(self):
+        pass

@@ -1,8 +1,9 @@
 from injector import Binder, Module, singleton
-# from .service import LoginService, ILoginService, A
+from .service import VaksinService
+from .accessor import VaksinAccessor
 
 
-# class AuthModule(Module):
-#     def configure(self, binder: Binder) -> None:
-#         binder.bind(ILoginService, to=LoginService, scope=singleton)
-#         binder.bind(A, to=A, scope=singleton)
+class VaksinModule(Module):
+    def configure(self, binder: Binder) -> None:
+        binder.bind(VaksinService, to=VaksinService, scope=singleton)
+        binder.bind(VaksinAccessor, to=VaksinAccessor, scope=singleton)
