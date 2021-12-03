@@ -8,9 +8,8 @@ class VaksinService:
     def __init__(self, vaksin_accessor: VaksinAccessor) -> None:
         self.vaksin_accessor = vaksin_accessor
 
-    def login(self, request: HttpRequest):
-        a = request.method
+    def create_reservasi(self, request: HttpRequest):
         pass
 
-    def test(self) -> str:
-        return "test success"
+    def get_reservasi(self, request: HttpRequest):
+        pass

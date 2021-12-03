@@ -22,12 +22,12 @@ def list_vaksin(request):
 
 @methods(["GET"])
 def list_reservasi_vaksin(request: HttpRequest):
-    # print(login_service.test())
-    # print(a.test())
+    
     return render(request, 'list-reservasi.html')
 
 @methods(["GET", "POST"])
 def create_reservasi_vaksin(request: HttpRequest):
-    
+    if request.method == "POST":
+        return vaksin_service.create_reservasi(request)
 
-    return render(request, 'create_reservasi_vaksin.html')
+    return vaksin_service.get_reservasi(request)

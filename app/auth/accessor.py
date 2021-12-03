@@ -1,4 +1,4 @@
-
+from .models import Pasien, Petugas, Admin
 
 
 class AuthAccessor:

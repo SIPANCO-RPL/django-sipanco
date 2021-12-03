@@ -8,6 +8,7 @@ class Pasien(User):
     no_wa = models.CharField(max_length=16)
     bpjs = models.CharField(max_length=32)
     alamat = models.CharField(max_length=512)
+    jml_vaksin = models.PositiveIntegerField(max_length=2)
 
 
 class Petugas(User):
