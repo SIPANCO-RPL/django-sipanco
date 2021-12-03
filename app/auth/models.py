@@ -10,10 +10,21 @@ class Pasien(User):
     alamat = models.CharField(max_length=512)
     jml_vaksin = models.PositiveIntegerField(max_length=2)
 
+    class Meta:
+        proxy = True
+        ordering = ('first_name', )
+
 
 class Petugas(User):
     nama = models.CharField(max_length=128)
 
+    class Meta:
+        proxy = True
+        ordering = ('first_name', )
+
 
 class Admin(User):
-    pass
+    
+    class Meta:
+        proxy = True
+        ordering = ('first_name', )

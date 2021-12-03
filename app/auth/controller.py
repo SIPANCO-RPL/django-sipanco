@@ -19,3 +19,6 @@ def login(request: HttpRequest):
         return auth_service.login(request)
 
     return auth_service.get_login(request)
+
+def logout(request: HttpRequest):
+    pass
