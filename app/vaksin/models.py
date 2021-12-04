@@ -17,8 +17,3 @@ class ReservasiVaksin(models.Model):
     selesai = models.BooleanField(default=False)
     pasien = models.ForeignKey(Pasien, on_delete=models.CASCADE)
     jadwal_vaksin = models.ForeignKey(JadwalVaksin, on_delete=models.CASCADE)
-
-
-class CreateReservasiVaksin(forms.Form):
-    kode = models.CharField(max_length=32)
-
