@@ -21,6 +21,8 @@ class VaksinAccessor:
         self, dict_data: Dict[str, Any]
     ) -> Optional[ReservasiVaksin]:
         try:
-            return ReservasiVaksin(**dict_data)
+            obj = ReservasiVaksin(**dict_data)
+            obj.save()
+            return obj
         except:
             return None
