@@ -1,9 +1,11 @@
+from typing import List
 from django.http.request import HttpRequest
 from django.shortcuts import redirect
 from injector import inject
 
 from app.auth.service import AuthService
 from app.auth.models import Pasien
+from app.vaksin.models import JadwalVaksin
 from .accessor import VaksinAccessor
 
 class VaksinService:
@@ -26,4 +28,6 @@ class VaksinService:
             pass
 
     def get_reservasi(self, request: HttpRequest):
+        # jadwal_vaksin: List[JadwalVaksin] = self.rumah_sakit_accessor.get_jadwal_vaksin(rs_id)
         pass
+
