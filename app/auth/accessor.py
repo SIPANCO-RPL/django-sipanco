@@ -27,7 +27,7 @@ class AuthAccessor:
         if not user_model:
             return None
 
-        user = user_model.objects.get(username=username)
+        user = user_model.objects.filter(username=username).first()
 
         if not user:
             return None
@@ -43,4 +43,4 @@ class AuthAccessor:
         if not user_model:
             return None
 
-        return user_model.objects.get(pk=user_id)
+        return user_model.objects.filter(pk=user_id).first()
