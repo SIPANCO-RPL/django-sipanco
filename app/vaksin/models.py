@@ -6,7 +6,8 @@ from app.rumah_sakit.models import RumahSakit
 
 
 class JadwalVaksin(models.Model):
-    waktu = models.DateTimeField()
+    tanggal = models.DateField()
+    waktu = models.TimeField()
     kuota = models.PositiveIntegerField()
     rumah_sakit = models.ForeignKey(RumahSakit, on_delete=models.CASCADE)
 
