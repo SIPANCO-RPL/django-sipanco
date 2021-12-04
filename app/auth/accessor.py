@@ -45,10 +45,6 @@ class AuthAccessor:
 
     def create_pasien(self, dict_data: dict) -> Optional[Pasien]:
         try:
-            # new_user = User(
-            #     username=dict_data["name"], password=dict_data["password"])
-            # new_user.save()
-
             new_user = User.objects.create_user(
                 username=dict_data["name"], password=dict_data["password"])
             new_user.save()

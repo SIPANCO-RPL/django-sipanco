@@ -13,13 +13,15 @@ class AuthService:
     def __init__(self, auth_accessor: AuthAccessor) -> None:
         self.auth_accessor = auth_accessor
 
-    def login(self, request: HttpRequest) -> Optional[User]:
+    def login(self, request: HttpRequest, *args, **kwargs) -> Optional[User]:
         # Login sebagai Pasien
         username = request.POST['username']
         password = request.POST['password']
 
-        user = self.auth_accessor.authenticate(username, password, type="pasien")
-        print(user)
+        tipe = kwargs.get('tipe', 'pasien')
+        print(tipe)
+
+        user = self.auth_accessor.authenticate(username, password, type=tipe)
         # user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user.user)

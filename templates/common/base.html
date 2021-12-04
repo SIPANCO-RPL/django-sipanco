@@ -194,8 +194,8 @@
                 </div>
               </div>
             </li>
-            {% block auth%}
-            {%if user.is_authenticated%}
+            {% block auth %}
+            {% if user.is_authenticated %}
             <li class="nav-item dropdown">
               <div class="dropdown">
                 <a href="" class="nav-link"
@@ -208,12 +208,18 @@
                 </div>
               </div>
             </li>
-            {%else%}
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+            {% else %}
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <div class="nav-link">Login</div>
+                <div class="dropdown-content">
+                  <a href="/login">Login Pengguna</a>
+                  <a href="/login-petugas">Login Petugas</a>
+                </div>
+              </div>
             </li>
-            {%endif%}
-            {%endblock auth%}
+            {% endif %}
+            {% endblock auth %}
           </ul>
         </div>
       </nav>

@@ -40,3 +40,12 @@ def register_pasien(request: HttpRequest):
         return render(request, "register/register.html", {"error_message": "terjadi error"})
     
     return render(request, "register/register.html")
+
+@methods(["GET", "POST"])
+def login_petugas(request: HttpRequest):
+    if request.method == "POST":
+        user = auth_service.login(request, tipe="petugas")
+        if user is not None:
+            return redirect("/")
+
+    return render(request, "login/login_petugas.html")

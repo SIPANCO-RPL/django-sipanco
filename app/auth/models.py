@@ -21,7 +21,7 @@ class Pasien(models.Model):
 
 class Petugas(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="petugas")
-    rumah_sakit = models.OneToOneField(RumahSakit, on_delete=models.CASCADE, related_name="petugas")
+    rumah_sakit = models.OneToOneField(RumahSakit, on_delete=models.CASCADE, related_name="petugas_rs", null=True)
     nama = models.CharField(max_length=128)
 
     def __str__(self):
