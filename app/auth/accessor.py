@@ -1,26 +1,24 @@
 from typing import Union, Optional
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
-from .models import Pasien, Petugas, Admin
+from .models import Pasien, Petugas
 
 
 class AuthAccessor:
     def __init__(self) -> None:
         pass
 
-    def _get_user_model(self, type: str = 'pasien') -> Optional[Union[Pasien, Petugas, Admin]]:
+    def _get_user_model(self, type: str = 'pasien') -> Optional[Union[Pasien, Petugas]]:
         if type == 'pasien':
             return Pasien
         if type == 'petugas':
             return Petugas
-        if type == 'admin':
-            return Admin
 
         return None
 
     def authenticate(
         self, username: str, password: str, type: str = "pasien"
-    ) -> Optional[Union[Pasien, Petugas, Admin]]:
+    ) -> Optional[Union[Pasien, Petugas]]:
 
         user_model = self._get_user_model(type)
 
@@ -37,7 +35,7 @@ class AuthAccessor:
 
         return None
 
-    def get_user_by_id(self, user_id: str, type: str = "pasien") -> Optional[Union[Pasien, Petugas, Admin]]:
+    def get_user_by_id(self, user_id: str, type: str = "pasien") -> Optional[Union[Pasien, Petugas]]:
         user_model = self._get_user_model(type)
 
         if not user_model:
