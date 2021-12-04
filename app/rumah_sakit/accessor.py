@@ -5,5 +5,5 @@ class RumahSakitAccessor:
     def __init__(self) -> None:
         pass
 
-    def login(self):
+    def get_ruangan(self):
         pass
