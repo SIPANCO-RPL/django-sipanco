@@ -18,6 +18,15 @@ class VaksinService:
         self.vaksin_accessor = vaksin_accessor
         self.auth_service = auth_service
 
+    def create_vaksin(self, request: HttpRequest):
+        user = self.auth_service.get_user(request)
+
+        if not user:
+            return redirect('/')
+
+        if isinstance(user, Pasien):
+            pass
+
     def create_reservasi(self, request: HttpRequest):
         user = self.auth_service.get_user(request)
 
