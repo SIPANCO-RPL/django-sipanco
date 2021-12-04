@@ -13,7 +13,7 @@ class VaksinAccessor:
         queryset = ReservasiVaksin.objects.all()
 
         if pasien_id:
-            queryset.filter(pasien_id=pasien_id)
+            queryset.filter(pasien__id=pasien_id)
 
         return queryset
 
