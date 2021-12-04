@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.http.request import HttpRequest
 from injector import inject
 from django.shortcuts import redirect
+from django.contrib.auth import logout
 
 from .accessor import AuthAccessor
 
@@ -13,19 +14,32 @@ class AuthService:
         self.auth_accessor = auth_accessor
 
     def login(self, request: HttpRequest) -> Optional[User]:
-        username = request.POST['email']
+        # Login sebagai Pasien
+        username = request.POST['username']
         password = request.POST['password']
 
-        user = auth.authenticate(username=username, password=password)
-
+        user = self.auth_accessor.authenticate(username, password, type="pasien")
+        print(user)
+        # user = auth.authenticate(username=username, password=password)
         if user is not None:
-            auth.login(request, user)
-            request.session.set_expiry(300) # auto logout dalam 5 menit
-            return redirect('/')
-
-
+            auth.login(request, user.user)
+            request.session.set_expiry(3600) # auto logout dalam 1 Jam
+            return user
+        
+        return None
+    
+    def register(self, request: HttpRequest) -> Optional[User]:
+        try:
+            user = self.auth_accessor.create_pasien(request.POST)
+            return user
+        except:
+            pass
+        
     def get_user(self, request: HttpRequest) -> Optional[User]:
         '''
         Get User Object based on the request, return None if not logged in
         '''
         return None
+    
+    def logout(self, request: HttpRequest):
+        logout(request)
