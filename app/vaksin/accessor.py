@@ -1,3 +1,4 @@
+from datetime import time, date
 from typing import Any, Dict, List, Optional
 
 from .models import ReservasiVaksin, JadwalVaksin
@@ -26,3 +27,17 @@ class VaksinAccessor:
             return obj
         except:
             return None
+
+    def create_vaksin(self, date: date, waktu: time, kuota: int) -> Optional[JadwalVaksin]:
+        try:
+            jadwalVaksin = JadwalVaksin(date, waktu, kuota, 0)
+            jadwalVaksin.save()
+            return jadwalVaksin
+        except:
+            return None
+
+    def get_all_jadwalVaksin(self) -> List[JadwalVaksin]:
+        return JadwalVaksin.objects.all()
+
+    def get_jadwalVaksin_by_petugas(self, kode: str) -> List[JadwalVaksin]:
+        return JadwalVaksin.objects.filter(rumahSakit__id = kode)

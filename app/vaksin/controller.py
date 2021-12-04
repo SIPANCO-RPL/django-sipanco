@@ -9,17 +9,23 @@ from .service import VaksinService
 
 vaksin_service = injector.get(VaksinService)
 
-@methods(["GET"])
-def create_vaksin(request):
-    # print(login_service.test())
-    # print(a.test())
+@methods(["GET", "POST"])
+def create_vaksin(request: HttpRequest):
+    if request.method == "POST":
+        jadwalVaksin = vaksin_service.create_vaksin(request)
+        if not jadwalVaksin:
+            context = {"message": "Jadwal vaksin gagal ditambah"}
+            return render(request, 'addVaksin.html', context)
+
+        context = {"message": "Jadwal vaksin berhasil ditambah"}
+        return render('addVaksin.html', context)
+
     return render(request, 'addVaksin.html')
 
-
-def list_vaksin(request):
-    # print(login_service.test())
-    # print(a.test())
-    return render(request, 'showVaksin.html')
+@methods(["GET"])
+def list_vaksin(request: HttpRequest):
+    vaksin_list = vaksin_service.get_reservasi_list(request)
+    return render(request, 'showVaksin.html', {'vaksin_list': vaksin_list})
 
 
 @methods(["GET"])

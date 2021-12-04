@@ -27,8 +27,6 @@ class VaksinService:
         if isinstance(user, Pasien):
             data = request.POST
             return self.vaksin_accessor.create_reservasi(data)
-        
-
 
     def get_reservasi_list(self, request: HttpRequest) -> List[ReservasiVaksin]:
         user = self.auth_service.get_user(request)
@@ -45,4 +43,27 @@ class VaksinService:
 
         return self.vaksin_accessor.get_reservasi_vaksin()
 
-        
+    def create_vaksin(self, request: HttpRequest) -> Optional[JadwalVaksin]:
+        user = self.auth_service.get_user(request)
+
+        if not user:
+            return None
+
+        if isinstance(user, Pasien):
+            data = request.POST
+            return self.vaksin_accessor.create_vaksin(data)
+
+    def get_jadwal_list(self, request: HttpRequest) -> List[JadwalVaksin]:
+        user = self.auth_service.get_user(request)
+
+        if not user:
+            return redirect('/')
+
+        if isinstance(user, Pasien):
+            return self.vaksin_accessor.get_jadwal_vaksin(pasien_id=user.id)
+
+        if isinstance(user, Petugas):
+            # get rumah sakit dari petugas -> get jadwal vaksin dari jadwal yg ada di rumah sakit
+            pass
+
+        return self.vaksin_accessor.get_jadwal_list()
