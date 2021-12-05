@@ -32,8 +32,19 @@ def create_ruangan(request: HttpRequest):
 
     return render(request, 'create_ruangan.html')
 
-def create_appointment(request):
-    return render(request, 'create_appointment.html')
+@methods(["GET"])
+def list_appointment(request: HttpRequest):
+    appointment_list = RumahSakitService.get_appointment_dokter(request)
+    return render(request, 'list_appointment.html', {'appointment_list': appointment_list})
 
-def list_appointment(request):
-    return render(request, 'list_appointment.html')
+@methods(["GET", "POST"])
+def create_appointment(request: HttpRequest):
+    if request.method == "POST":
+        reservasi = RumahSakitService.create_appointment_dokter(request)
+        if not reservasi:
+            context = {"message": "Gagal Membuat Reservasi"}
+            return render(request, 'create_appointment.html', context)
+
+        return reverse(list_appointment)
+
+    return render(request, 'create_appointment.html')
