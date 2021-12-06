@@ -10,7 +10,7 @@ class Pasien(models.Model):
     no_wa = models.CharField(max_length=16, default="")
     bpjs = models.CharField(max_length=32, default="")
     alamat = models.CharField(max_length=512, default="")
-    jml_vaksin = models.PositiveIntegerField(max_length=2, default=0)
+    jml_vaksin = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.nama
