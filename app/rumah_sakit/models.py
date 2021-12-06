@@ -31,7 +31,7 @@ class JadwalDokter(models.Model):
     def __str__(self):
         return self.nama
 
-class Apppointment(models.Model):
+class AppointmentDokter(models.Model):
     kode = models.CharField(max_length=64)
     keluhan = models.CharField(max_length=256)
     pasien = models.ForeignKey(Pasien, on_delete=models.CASCADE)
