@@ -44,7 +44,10 @@ class AuthService:
         '''
         user = request.user
 
-        if not user.is_authenticated or user.is_superuser:
+        if user.is_superuser:
+            return user
+
+        if not user.is_authenticated:
             return None
 
         return getattr(user, 'petugas', None) or getattr(user, 'pasien', None)

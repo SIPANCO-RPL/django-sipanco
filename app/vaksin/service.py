@@ -49,8 +49,8 @@ class VaksinService:
     def get_reservasi_list(self, request: HttpRequest) -> List[ReservasiVaksin]:
         user = self.auth_service.get_user(request)
 
-        if not user:
-            return redirect('/')
+        if user.is_superuser:
+            return self.reservasi_vaksin_accessor.get_reservasi_vaksin()
 
         if isinstance(user, Pasien):
             return self.reservasi_vaksin_accessor.get_reservasi_vaksin(pasien_id=user.id)
