@@ -6,17 +6,19 @@ from injector import inject
 from app.auth.service import AuthService
 from app.auth.models import Pasien, Petugas
 from app.vaksin.models import JadwalVaksin, ReservasiVaksin
-from .accessor import VaksinAccessor
+from .accessor import ReservasiVaksinAccessor, JadwalVaksinAccessor
 
 class VaksinService:
     @inject
     def __init__(
         self,
-        vaksin_accessor: VaksinAccessor,
+        vaksin_accessor: ReservasiVaksinAccessor,
+        jadwal_vaksin_accessor: JadwalVaksinAccessor,
         auth_service: AuthService,
     ) -> None:
-        self.vaksin_accessor = vaksin_accessor
+        self.reservasi_vaksin_accessor = vaksin_accessor
         self.auth_service = auth_service
+        self.jadwal_vaksin_accessor = jadwal_vaksin_accessor
 
     def create_reservasi(self, request: HttpRequest) -> Optional[ReservasiVaksin]:
         user = self.auth_service.get_user(request)
@@ -26,7 +28,7 @@ class VaksinService:
 
         if isinstance(user, Pasien):
             data = request.POST
-            return self.vaksin_accessor.create_reservasi(data)
+            return self.reservasi_vaksin_accessor.create_reservasi(data)
         
 
 
@@ -37,12 +39,13 @@ class VaksinService:
             return redirect('/')
 
         if isinstance(user, Pasien):
-            return self.vaksin_accessor.get_reservasi_vaksin(pasien_id=user.id)
+            return self.reservasi_vaksin_accessor.get_reservasi_vaksin(pasien_id=user.id)
 
         if isinstance(user, Petugas):
-            # get rumah sakit dari petugas -> get reservasi vaksin dari jadwal yg ada di rumah sakit
-            pass
+            # jadwal = self.jadwal_vaksin_accessor.get_by_rs(user.rumah_sakit.id)
+            rs_id = user.rumah_sakit.id
+            return self.reservasi_vaksin_accessor.get_reservasi_vaksin(rs_id=rs_id)
 
-        return self.vaksin_accessor.get_reservasi_vaksin()
+        return self.reservasi_vaksin_accessor.get_reservasi_vaksin()
 
         
