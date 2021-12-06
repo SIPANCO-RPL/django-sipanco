@@ -41,7 +41,10 @@ class AuthAccessor:
         if not user_model:
             return None
 
-        return user_model.objects.filter(pk=user_id).first()
+        try:
+            return user_model.objects.get(pk=user_id)
+        except:
+            return None
 
     def create_pasien(self, dict_data: dict) -> Optional[Pasien]:
         try:

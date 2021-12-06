@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import Optional, Union
 from django.contrib.auth.models import User, auth
 from django.http.request import HttpRequest
 from injector import inject
-from django.shortcuts import redirect
 from django.contrib.auth import logout
+
+from app.auth.models import Pasien, Petugas
 
 from .accessor import AuthAccessor
 
@@ -37,11 +38,16 @@ class AuthService:
         except:
             pass
         
-    def get_user(self, request: HttpRequest) -> Optional[User]:
+    def get_user(self, request: HttpRequest) -> Optional[Union[Pasien, Petugas]]:
         '''
         Get User Object based on the request, return None if not logged in
         '''
-        return None
+        user = request.user
+
+        if not user.is_authenticated:
+            return None
+
+        return user.petugas or user.pasien
     
     def logout(self, request: HttpRequest):
         logout(request)
