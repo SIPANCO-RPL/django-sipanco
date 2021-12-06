@@ -46,8 +46,10 @@ class AuthService:
 
         if not user.is_authenticated:
             return None
-
-        return user.petugas or user.pasien
+        
+        if isinstance(user, Petugas):
+            return user.petugas
+        return user.pasien
     
     def logout(self, request: HttpRequest):
         logout(request)
