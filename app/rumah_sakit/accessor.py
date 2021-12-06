@@ -12,7 +12,6 @@ class RumahSakitAccessor:
             ruangan = Ruangan.objects.create(kode=kode, kapasitas=kapasitas, kapasitasTergunakan=0, rumahSakit=rumah_sakit)
             return ruangan
         except:
-            print("gagal")
             return None
 
     def _get_rumah_sakit(self, kode: str) -> Optional[RumahSakit]:
