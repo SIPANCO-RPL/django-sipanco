@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from app.rumah_sakit.models import RumahSakit
 
 
 class Pasien(models.Model):
@@ -21,7 +20,6 @@ class Pasien(models.Model):
 
 class Petugas(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="petugas")
-    rumah_sakit = models.OneToOneField(RumahSakit, on_delete=models.CASCADE, related_name="petugas_rs", null=True)
     nama = models.CharField(max_length=128)
 
     def __str__(self):
