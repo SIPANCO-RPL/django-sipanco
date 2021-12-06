@@ -2,6 +2,8 @@ from typing import List, Optional
 from django.http.request import HttpRequest
 from django.shortcuts import redirect
 from injector import inject
+import random
+import string
 
 from app.auth.service import AuthService
 from app.auth.models import Pasien, Petugas
@@ -27,9 +29,21 @@ class VaksinService:
             return None
 
         if isinstance(user, Pasien):
-            data = request.POST
-            return self.reservasi_vaksin_accessor.create_reservasi(data)
-        
+            jadwal = self.jadwal_vaksin_accessor.get_by_id(request.POST['jadwal_id'])
+
+            if jadwal.reservasi_vaksin_set.count() >= jadwal.kuota:
+                return None
+
+            kode = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+            kode = f"{kode}_{jadwal.id}_{jadwal.kuota_terisi}"
+            data = {
+                'jadwal_vaksin': jadwal,
+                'pasien': user,
+                'selesai': False,
+                'vaksin_ke': user.jml_vaksin + 1,
+                'kode': kode
+            }
+            return self.reservasi_vaksin_accessor.create(data)
 
 
     def get_reservasi_list(self, request: HttpRequest) -> List[ReservasiVaksin]:
@@ -46,6 +60,4 @@ class VaksinService:
             rs_id = user.rumah_sakit.id
             return self.reservasi_vaksin_accessor.get_reservasi_vaksin(rs_id=rs_id)
 
-        return self.reservasi_vaksin_accessor.get_reservasi_vaksin()
-
-        
+        return []

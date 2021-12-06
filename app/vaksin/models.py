@@ -12,7 +12,7 @@ class JadwalVaksin(models.Model):
 
 
 class ReservasiVaksin(models.Model):
-    kode = models.CharField(max_length=32)
+    kode = models.CharField(max_length=32, default='NO_CODE')
     vaksin_ke = models.SmallIntegerField(default=0)
     selesai = models.BooleanField(default=False)
     pasien = models.ForeignKey(Pasien, on_delete=models.CASCADE)

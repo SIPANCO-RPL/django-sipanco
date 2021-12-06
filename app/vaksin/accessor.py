@@ -1,4 +1,5 @@
 from typing import Any, Dict, List, Optional
+from django.db.models import F
 
 from .models import ReservasiVaksin, JadwalVaksin
 
@@ -22,7 +23,7 @@ class ReservasiVaksinAccessor:
 
         return queryset
 
-    def create_reservasi(
+    def create(
         self, dict_data: Dict[str, Any]
     ) -> Optional[ReservasiVaksin]:
         try:
@@ -43,3 +44,9 @@ class JadwalVaksinAccessor:
         queryset.filter(rumah_sakit__id=rs_id)
 
         return queryset
+
+    def get_by_id(self, id) -> Optional[JadwalVaksin]:
+        try:
+            return JadwalVaksin.objects.get(pk=id)
+        except:
+            return None
