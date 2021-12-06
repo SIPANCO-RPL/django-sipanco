@@ -14,29 +14,21 @@
           <tr>
             <th scope="col"></th>
             <th scope="col">Nama Pasien</th>
+            <th scope="col">Kode Reservasi</th>
             <th scope="col">Rumah Sakit</th>
             <th scope="col">Jadwal</th>
           </tr>
         </thead>
         <tbody>
+          {% for r in reservasi_list%}
           <tr>
-            <th scope="row">1</th>
-            <td>Anjay Gurinjay</td>
-            <td>RS Sentosa</td>
-            <td>12-Dec-2021 17:00-18:00</td>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{r.pasien.nama}}</td>
+            <td>{{r.kode}}</td>
+            <td>{{r.jadwal_vaksin.rumah_sakit.nama}}</td>
+            <td>{{r.jadwal_vaksin.waktu}}</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Anjay Gurinjay1</td>
-            <td>RS Sejahtera</td>
-            <td>12-Dec-2021 17:00-18:00</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Anjay Gurinjay2</td>
-            <td>RS Sentosa</td>
-            <td>12-Dec-2021 17:00-18:00</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
       <style>
