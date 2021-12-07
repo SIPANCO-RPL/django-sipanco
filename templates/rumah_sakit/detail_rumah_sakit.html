@@ -117,7 +117,7 @@
                     </h1>
                     <div class="pt-4">
                         {% if user.is_authenticated and user.pasien %}
-                        <a class="px-3 xl:px-6 py-2 lg:py-3 text-xs xl:text-base rounded-xl bg-red-500 hover:text-white
+                        <a href="{% url 'app:rumah_sakit:create_appointment' jadwaldokter_id=data_jadwal.id %}" class="px-3 xl:px-6 py-2 lg:py-3 text-xs xl:text-base rounded-xl bg-red-500 hover:text-white
                                 hover:no-underline hover:shadow-lg text-center cursor-pointer text-white">
                             Buat Appointment
                         </a>

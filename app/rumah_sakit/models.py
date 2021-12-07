@@ -47,10 +47,6 @@ class JadwalDokter(models.Model):
         ]
 
 class AppointmentDokter(models.Model):
-    kode = models.CharField(max_length=64)
     keluhan = models.CharField(max_length=256)
     pasien = models.ForeignKey(Pasien, on_delete=models.CASCADE)
     jadwal_dokter = models.ForeignKey(JadwalDokter, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.kode
