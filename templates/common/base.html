@@ -190,10 +190,15 @@
               <div class="dropdown">
                 <a href="" class="nav-link">Vaksin</a>
                 <div class="dropdown-content">
-                  <a href="/jadwal-vaksin-saya">Jadwal Vaksin Saya</a>
+                  {% if user.is_authenticated and user.petugas %}
+                  <a href="/vaksin/reservasi/list">Jadwal Reservasi Vaksin</a>
+                  {% else %}
+                  <a href="/vaksin/reservasi/list">Jadwal Vaksin Saya</a>
+                  {% endif %}
+                  {% if user.is_authenticated and user.petugas %}
                   <a href="/vaksin/addVaksin">Tambah Jadwal Vaksin</a>
+                  {% endif %}
                   <a href="/vaksin">Lihat Jadwal Vaksin</a>
-                  <a href="/rumah-sakit/listappointment">Reservasi Jadwal Vaksin</a>
                 </div>
               </div>
             </li>
