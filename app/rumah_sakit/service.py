@@ -22,7 +22,8 @@ class RumahSakitService:
             return None
 
         if isinstance(user, Petugas):
-            return self.rumah_sakit_accessor.create_ruangan(request.POST["kodeRuangan"], request.POST["kapastias"])
+            ruangan = self.rumah_sakit_accessor.create_ruangan(request.POST["kode"], request.POST["kapasitas"], request.user.petugas.rumah_sakit)
+            return ruangan
 
     def get_all_ruangan(self, request: HttpRequest) -> List[Ruangan]:
         user = self.auth_service.get_user(request)
@@ -31,8 +32,7 @@ class RumahSakitService:
             return self.rumah_sakit_accessor.get_all_ruangan()
         
         if isinstance(user, Petugas):
-            #return self.rumah_sakit_accessor.get_ruangan_by_petugas(user.get_rumah_sakit)
-            pass
+            return self.rumah_sakit_accessor.get_ruangan_by_rumah_sakit(user.rumah_sakit)
         
         return self.rumah_sakit_accessor.get_all_ruangan()
 
@@ -51,7 +51,7 @@ class RumahSakitService:
         user = self.auth_service.get_user(request)
 
         if not user:
-            return redirect('/')
+            return None
 
         if isinstance(user, Pasien):
             return self.rumah_sakit_accessor.get_appointment_dokter(pasien_id=user.id)
