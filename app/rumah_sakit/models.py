@@ -26,6 +26,11 @@ class Ruangan(models.Model):
     def __str__(self):
         return self.kode
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['kode', 'rumahSakit'], name='ruangan constraint')
+        ]
+
 class JadwalDokter(models.Model):
     kode = models.CharField(max_length=64)
     nama = models.CharField(max_length=256)

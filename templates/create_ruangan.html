@@ -33,4 +33,24 @@
         </div>
     </form>
 </div>
+{% if failed %}
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        confirmButtonColor: '#D73A2F',
+        text: 'Ruangan gagal dibuat',
+    })
+</script>
+{% endif %}
+{% if success %}
+<script>
+    Swal.fire(
+        'Great!',
+        'Ruangan berhasil dibuat',
+        'success'
+    )
+    setTimeout(function(){ location.href = '/'; }, 2000);
+</script>
+{% endif %}
 {% endblock content %}
