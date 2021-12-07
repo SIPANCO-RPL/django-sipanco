@@ -315,4 +315,14 @@
         </div>
     </div>
 </div>
+{% if error_message %}
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        confirmButtonColor: '#D73A2F',
+        text: 'Sepertinya username / passwordmu salah',
+    })
+</script>
+{% endif %}
 {% endblock content %}

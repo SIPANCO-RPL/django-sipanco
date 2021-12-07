@@ -300,7 +300,7 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="div">
-                        <input type="text" class="input" name="name" placeholder="Username" />
+                        <input required type="text" class="input" name="name" placeholder="Username" />
                     </div>
                 </div>
                 <div class="input-div pass" data-aos="fade-up" data-aos-delay="600">
@@ -308,7 +308,7 @@
                         <i class="far fa-address-card"></i>
                     </div>
                     <div class="div">
-                        <input type="text" class="input" name="no_ktp" placeholder="No KTP" />
+                        <input required type="text" class="input" name="no_ktp" placeholder="No KTP" />
                     </div>
                 </div>
                 <div class="input-div pass" data-aos="fade-up" data-aos-delay="600">
@@ -316,7 +316,7 @@
                         <i class="fas fa-phone"></i>
                     </div>
                     <div class="div">
-                        <input type="text" class="input" name="no_wa" placeholder="No WA" />
+                        <input required type="text" class="input" name="no_wa" placeholder="No WA" />
                     </div>
                 </div>
                 <div class="input-div pass" data-aos="fade-up" data-aos-delay="600">
@@ -324,7 +324,7 @@
                         <i class="far fa-address-card"></i>
                     </div>
                     <div class="div">
-                        <input type="text" class="input" name="bpjs" placeholder="bpjs" />
+                        <input required type="text" class="input" name="bpjs" placeholder="bpjs" />
                     </div>
                 </div>
                 <div class="input-div pass" data-aos="fade-up" data-aos-delay="600">
@@ -332,7 +332,7 @@
                         <i class="fas fa-address-book"></i>
                     </div>
                     <div class="div">
-                        <input type="text" class="input" name="alamat" placeholder="alamat" />
+                        <input required type="text" class="input" name="alamat" placeholder="alamat" />
                     </div>
                 </div>
                 <div class="input-div pass" data-aos="fade-up" data-aos-delay="900">
@@ -340,7 +340,7 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="div">
-                        <input type="password" class="input" name="password" id="password"  placeholder="Password" onkeyup='check();' />
+                        <input required type="password" class="input" name="password" id="password"  placeholder="Password" onkeyup='check();' />
                     </div>
                 </div>
                 <div class="input-div pass" data-aos="fade-up" data-aos-delay="1200">
@@ -348,7 +348,7 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="div">
-                        <input type="password" class="input" name="passwordconfirm" id="confirm_password" placeholder="Confirm Password" onkeyup='check();' />
+                        <input required type="password" class="input" name="passwordconfirm" id="confirm_password" placeholder="Confirm Password" onkeyup='check();' />
                     </div>
                 </div>
                 <div>
@@ -392,4 +392,23 @@
         </div>
     </div>
 </div>
+{% if error_message %}
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        confirmButtonColor: '#D73A2F',
+        text: 'Terjadi kesalahan, pastikan username mu unik',
+    })
+</script>
+{% endif %}
+{% if created_user %}
+<script>
+    Swal.fire(
+        'Great!',
+        'Akun {{created_user.user.username}} berhasil dibuat',
+        'success'
+    )
+</script>
+{% endif %}
 {% endblock content %}
