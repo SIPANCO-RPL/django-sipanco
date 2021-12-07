@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
@@ -136,6 +138,10 @@
       right: 0;
       z-index: -1;
     }
+
+    #nav-sipanco:hover {
+      color: #931F17;
+    }
   </style>
   {% block style %}
   {% endblock style %}
@@ -146,7 +152,7 @@
   <header id="navbar">
     <div class="container-fluid p-0">
       <nav class="navbar navbar-expand-lg ">
-        <a class="navbar-brand" href="/">SIPANCO</a>
+        <a class="navbar-brand" href="/" id="nav-sipanco">SIPANCO</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
@@ -173,7 +179,9 @@
               <div class="dropdown">
                 <a href="" class="nav-link">Dokter</a>
                 <div class="dropdown-content">
+                  {% if user.is_authenticated and user.petugas %}
                   <a href="/rumah-sakit/create-jadwal">Membuat Jadwal Dokter</a>
+                  {% endif %}
                   <a href="/rumah-sakit/listappointment">Melihat Appointment Dokter</a>
                 </div>
               </div>
@@ -182,39 +190,55 @@
               <div class="dropdown">
                 <a href="" class="nav-link">Vaksin</a>
                 <div class="dropdown-content">
-                  <a href="/jadwal-vaksin-saya">Jadwal Vaksin Saya</a>
+                  {% if user.is_authenticated and user.petugas %}
+                  <a href="/vaksin/reservasi/list">Jadwal Reservasi Vaksin</a>
+                  {% else %}
+                  <a href="/vaksin/reservasi/list">Jadwal Vaksin Saya</a>
+                  {% endif %}
+                  {% if user.is_authenticated and user.petugas %}
                   <a href="/vaksin/addVaksin">Tambah Jadwal Vaksin</a>
+                  {% endif %}
                   <a href="/vaksin">Lihat Jadwal Vaksin</a>
-                  <a href="/rumah-sakit/listappointment">Reservasi Jadwal Vaksin</a>
                 </div>
               </div>
             </li>
-            {% block auth%}
-            {%if user.is_authenticated%}
+            {% block auth %}
+            {% if user.is_authenticated %}
             <li class="nav-item dropdown">
               <div class="dropdown">
                 <a href="" class="nav-link"
-                  style="background-color: #ed443b; border-radius: 2em; color: #ffffff; padding-left: 2em; padding-right: 2em; font-weight: 700;">Hi,
-                  {{request.user}}</a>
+                  style="background-color: #ed443b; border-radius: 10px; color: #ffffff; padding-left: 25px; padding-right: 25px; font-weight: 700;">
+                  <span><i class="fas fa-user" style="margin-right: 10px;"></i></span>
+                  {{request.user}}
+                </a>
                 <div class="dropdown-content">
-                  <a href="">Logout</a>
+                  <a href="{% url 'app:auth:logout' %}">Logout</a>
                 </div>
               </div>
             </li>
-            <!-- <li class="nav-item"> -->
-            <!-- <a class="nav-link" href="{% url 'login:logout'%}">Logout</a> -->
-            <!-- </li> -->
-            {%else%}
-            <li class="nav-item">
-              <a class="nav-link" href="">Login</a>
+            {% else %}
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <div class="nav-link">Login</div>
+                <div class="dropdown-content">
+                  <a href="/login">Login Pengguna</a>
+                  <a href="/login-petugas">Login Petugas</a>
+                </div>
+              </div>
             </li>
-            {%endif%}
-            {%endblock auth%}
+            {% endif %}
+            {% endblock auth %}
           </ul>
         </div>
       </nav>
     </div>
   </header>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <!-- <script src="sweetalert2.all.min.js"></script> -->
   {% block content %}
   {% endblock content %}
 </body>

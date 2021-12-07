@@ -1,5 +1,14 @@
 from django.contrib import admin
-from .auth.models import *
+
+from app.vaksin.models import *
+from app.auth.models import *
+from app.rumah_sakit.models import *
 # Register your models here.
 
-admin.register(Pasien)
+admin.site.register(Pasien)
+admin.site.register(Petugas)
+admin.site.register(RumahSakit)
+admin.site.register(Ruangan)
+admin.site.register(JadwalDokter)
+admin.site.register(JadwalVaksin)
+admin.site.register(ReservasiVaksin)
