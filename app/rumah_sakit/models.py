@@ -6,7 +6,7 @@ from app.auth.models import Petugas
 
 class RumahSakit(models.Model):
     kode = models.CharField(max_length=64)
-    nama = models.CharField(max_length=256)
+    nama = models.CharField(max_length=256, unique=True)
     alamat = models.CharField(max_length=512)
     kecamatan = models.CharField(max_length=256, null=True, default="Beji")
     kota = models.CharField(max_length=256, null=True, default="Depok")
@@ -30,10 +30,16 @@ class JadwalDokter(models.Model):
     kode = models.CharField(max_length=64)
     nama = models.CharField(max_length=256)
     spesialis = models.CharField(max_length=512)
-    jadwal = models.CharField(max_length=512)
+    jadwal = models.DateTimeField(null=True)
+    rumahsakit = models.ForeignKey(RumahSakit, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.nama
+        return self.kode
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['nama', 'jadwal', 'rumahsakit'], name='jadwal constraint')
+        ]
 
 class AppointmentDokter(models.Model):
     kode = models.CharField(max_length=64)
