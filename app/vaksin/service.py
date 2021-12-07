@@ -23,8 +23,12 @@ class VaksinService:
         self.auth_service = auth_service
         self.jadwal_vaksin_accessor = jadwal_vaksin_accessor
 
-    def _cek_jumlah_reservasi(self, pasien: Pasien) -> int:
-        return len(list(self.reservasi_vaksin_accessor.get_valid_by_pasien(pasien.id)))
+    def _cek_jumlah_reservasi(
+        self,
+        pasien_id: Optional[int] = None,
+        jadwal_id: Optional[int] = None,
+    ) -> int:
+        return len(list(self.reservasi_vaksin_accessor.get_valid(pasien_id=pasien_id, jadwal_id=jadwal_id)))
 
     def create_reservasi(self, request: HttpRequest, jadwal_id: int) -> Optional[ReservasiVaksin]:
         user = self.auth_service.get_user(request)
@@ -32,17 +36,17 @@ class VaksinService:
         if not isinstance(user, Pasien):
             return None
 
-        if self._cek_jumlah_reservasi(user) >= Pasien.MAX_VAKSIN:
+        if self._cek_jumlah_reservasi(pasien_id=user.id) >= Pasien.MAX_VAKSIN:
             return None
 
         jadwal = self.jadwal_vaksin_accessor.get_by_id(jadwal_id)
-        kuota = jadwal.reservasivaksin_set.count()
+        kuota_terisi = self._cek_jumlah_reservasi(jadwal_id=jadwal_id)
 
-        if kuota >= jadwal.kuota:
+        if kuota_terisi >= jadwal.kuota or self._cek_jumlah_reservasi(pasien_id=user.id, jadwal_id=jadwal_id) >= 1:
             return None
 
         kode = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
-        kode = f"{kode}_{jadwal.id}_{jadwal.kuota + 1}"
+        kode = f"{user.id}_{kode}_{jadwal.id}_{kuota_terisi + 1}"
         data = {
             'jadwal_vaksin': jadwal,
             'pasien': user,
@@ -58,12 +62,15 @@ class VaksinService:
         if not isinstance(user, Pasien):
             return {"success": False, "message": "Kamu tidak bisa membuat reservasi"}
 
-        if self._cek_jumlah_reservasi(user) >= 2:
+        if self._cek_jumlah_reservasi(pasien_id=user.id) >= 2:
             return {"success": False, "message": "Kamu memiliki reservasi lebih dari 2"}
 
         jadwal = self.jadwal_vaksin_accessor.get_by_id(jadwal_id)
 
-        if jadwal.reservasivaksin_set.count() >= jadwal.kuota:
+        if not jadwal:
+            return {"success": False, "message": "Jadwal yang kamu pilih tidak valid"}
+
+        if self._cek_jumlah_reservasi(jadwal_id=jadwal_id) >= jadwal.kuota:
             return {"success": False, "message": "Kuota sudah penuh"}
 
         rumah_sakit: RumahSakit = jadwal.rumah_sakit
@@ -83,7 +90,6 @@ class VaksinService:
             return self.reservasi_vaksin_accessor.get_list()
 
         if isinstance(user, Pasien):
-            print(user)
             return self.reservasi_vaksin_accessor.get_list(pasien_id=user.id)
 
         if isinstance(user, Petugas):

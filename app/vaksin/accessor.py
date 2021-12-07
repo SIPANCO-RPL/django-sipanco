@@ -23,12 +23,18 @@ class ReservasiVaksinAccessor:
 
         return queryset
 
-    def get_valid_by_pasien(
+    def get_valid(
         self,
-        pasien_id: int,
+        pasien_id: Optional[int] = None,
+        jadwal_id: Optional[int] = None,
     ) -> List[ReservasiVaksin]:
-        queryset = ReservasiVaksin.objects.all()
-        queryset = queryset.filter(pasien__id=pasien_id).exclude(status="BATAL")
+        queryset = ReservasiVaksin.objects.all().exclude(status="BATAL")
+        if pasien_id:
+            queryset = queryset.filter(pasien__id=pasien_id)
+        
+        if jadwal_id:
+            queryset = queryset.filter(jadwal_vaksin__id=jadwal_id)
+
         return queryset
 
     def create(

@@ -20,7 +20,6 @@ class AuthService:
         password = request.POST['password']
 
         tipe = kwargs.get('tipe', 'pasien')
-        print(tipe)
 
         user = self.auth_accessor.authenticate(username, password, type=tipe)
         # user = auth.authenticate(username=username, password=password)
