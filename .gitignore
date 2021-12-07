@@ -60,3 +60,6 @@ staticfiles/
 
 # ignore virtual environment
 env/
+
+#ignore ds store
+.DS_Store

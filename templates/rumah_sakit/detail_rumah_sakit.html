@@ -10,7 +10,7 @@
 {% block content %}
 <div class="z-30">
     <div class="container mx-auto mt-32">
-        <a class="text-red-500 hover:text-red-500 text-lg" href="/rumah-sakit">&#60; Kembali</a>
+        <a class="text-red-500 hover:text-red-500 text-lg" href="/rumah-sakit" style="text-decoration: none;">&#60; Kembali</a>
         <div class="flex flex-col md:flex-row space-y-6 md:space-y-0 items-center md:items-start justify-between mt-8">
             <div class="flex flex-col items-center md:items-start">
                 <h1 class="mb-2 text-3xl sm:text-4xl">Detail Rumah Sakit</h1>
@@ -21,15 +21,31 @@
     <div>
         <div class="container mx-auto mt-12">
             <div class="flex flex-col lg:flex-row items-start space-x-0 lg:space-x-12 space-y-12 lg:space-y-0">
-                <img src="{% static 'img/rsui.jpeg' %}" alt="gambar makanan" id="image" class="rounded-xl" />
+                {% if mod_number == 0 %}
+                <img src="{% static 'img/hospital-0.jpeg' %}" alt="gambar detail rumah sakit" id="image" class="rounded-xl" />
+                {% elif mod_number == 1 %}
+                <img src="{% static 'img/hospital-1.jpeg' %}" alt="gambar detail rumah sakit" id="image" class="rounded-xl" />
+                {% elif mod_number == 2 %}
+                <img src="{% static 'img/hospital-2.jpeg' %}" alt="gambar detail rumah sakit" id="image" class="rounded-xl" />
+                {% elif mod_number == 3 %}
+                <img src="{% static 'img/hospital-3.jpeg' %}" alt="gambar detail rumah sakit" id="image" class="rounded-xl" />
+                {% elif mod_number == 4 %}
+                <img src="{% static 'img/hospital-4.jpeg' %}" alt="gambar detail rumah sakit" id="image" class="rounded-xl" />
+                {% endif %}
                 <div class="flex flex-col h-auto space-y-4 lg:pr-12 xl:pr-40 2xl:pr-64">
-                    <input readOnly hidden id="idSeller" type="text" value={product.ownerAccount.id} />
-                    <input readOnly hidden id="sellerName" type="text" value={toTitleCase(product.ownerAccount.name)} />
-                    <p class="text-4xl font-bold text-red-500"></p>
-                    <p class="text-2xl font-bold">Rumah Sakit UI</p>
-                    <p class="text-lg font-semibold text-gray-400">Pondok Cina, Kecamatan Beji, Kota Depok, Jawa Barat
-                        16424</p>
-                    <p>Stok Kamar : 500</p>
+                    <p class="text-4xl font-bold text-red-500">{{detail_data.nama}}</p>
+                    <p class="text-2xl font-bold">{{detail_data.alamat}}</p>
+                    <p class="text-lg font-semibold text-gray-400">{{detail_data.kecamatan}}, {{detail_data.kota}}, {{detail_data.provinsi}}
+                        {{detail_data.kodepos}}</p>
+                    {% if detail_data.ruangan_set.all %}
+                    {% for referer in detail_data.ruangan_set.all %}
+                        <p>Kode Ruangan : {{referer.kode}}, Kapasitas : {{ referer.kapasitasTergunakan }} / {{referer.kapasitas }}</p>
+                        <!-- <p></p> -->
+                    {% endfor %}
+                    {% else %}
+                        <p>Belum terdapat ruangan yang terdaftar</p>
+                    {% endif %}
+                    <!-- <p>Stok Kamar : 500</p> -->
                     <p>Stok Vaksin : 200</p>
                     <!-- <div class="pt-2 flex flex-col lg:flex-row space-x-0 lg:space-x-6 space-y-6 lg:space-y-0">
                         <a href="editproduct.html"

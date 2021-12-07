@@ -8,11 +8,18 @@ from app.rumah_sakit.service import RumahSakitService
 
 rumah_sakit_service = injector.get(RumahSakitService)
 
+@methods(["GET"])
 def lihat_rumah_sakit(request):
-    return render(request, 'rumah_sakit.html')
+    context = {"list_rumah_sakit": rumah_sakit_service.get_all_rumahsakit(request)}
+    return render(request, 'rumah_sakit/rumah_sakit.html', context)
 
-def lihat_jadwal_dokter(request):
-    return render(request, 'jadwal_dokter.html')
+@methods(["GET"])
+def detail_rumah_sakit(request, num: int):
+    mod_number = num % 5
+    detail_data = rumah_sakit_service.get_rumah_sakit_by_id(num)
+    
+    context = {"mod_number": mod_number, "detail_data": detail_data}
+    return render(request, 'rumah_sakit/detail_rumah_sakit.html', context)
 
 @methods(["GET"])
 def lihat_ruangan(request: HttpRequest):

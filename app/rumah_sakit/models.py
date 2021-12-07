@@ -8,6 +8,10 @@ class RumahSakit(models.Model):
     kode = models.CharField(max_length=64)
     nama = models.CharField(max_length=256)
     alamat = models.CharField(max_length=512)
+    kecamatan = models.CharField(max_length=256, null=True, default="Beji")
+    kota = models.CharField(max_length=256, null=True, default="Depok")
+    provinsi = models.CharField(max_length=256, null=True, default="Jawa Barat")
+    kodepos = models.CharField(max_length=256, null=True, default="16424")
     petugas = models.OneToOneField(Petugas, on_delete=models.CASCADE, related_name="rumah_sakit", null=True)
 
     def __str__(self):

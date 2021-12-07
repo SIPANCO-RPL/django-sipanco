@@ -16,6 +16,12 @@ class RumahSakitAccessor:
 
     def _get_rumah_sakit(self, kode: str) -> Optional[RumahSakit]:
         return RumahSakit.objects.filter(pk=kode).first()
+    
+    def get_rumah_sakit_by_id(self, num: int) -> Optional[RumahSakit]:
+        return RumahSakit.objects.get(id=num)
+    
+    def get_all_rumahsakit(self) -> List[RumahSakit]:
+        return RumahSakit.objects.all()
 
     def get_all_ruangan(self) -> List[Ruangan]:
         return Ruangan.objects.all()
