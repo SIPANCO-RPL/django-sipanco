@@ -16,6 +16,12 @@ class RumahSakitAccessor:
 
     def _get_rumah_sakit(self, kode: str) -> Optional[RumahSakit]:
         return RumahSakit.objects.filter(pk=kode).first()
+    
+    def get_rumah_sakit_by_id(self, num: int) -> Optional[RumahSakit]:
+        return RumahSakit.objects.get(id=num)
+    
+    def get_all_rumahsakit(self) -> List[RumahSakit]:
+        return RumahSakit.objects.all()
 
     def get_all_ruangan(self) -> List[Ruangan]:
         return Ruangan.objects.all()
@@ -32,6 +38,15 @@ class RumahSakitAccessor:
             queryset.filter(pasien__id=pasien_id)
 
         return queryset
+    
+    def create_jadwal(self, dict_data: Dict[str, Any], obj_rs: RumahSakit
+    ) -> Optional[JadwalDokter]:
+        try:
+            new_jadwal = JadwalDokter(kode=dict_data["kode"], nama=dict_data["nama"], spesialis=dict_data["spesialis"], jadwal=dict_data["jadwal"], rumahsakit=obj_rs)
+            new_jadwal.save()
+            return new_jadwal
+        except:
+            return None
 
     def create_appointment(
         self, dict_data: Dict[str, Any]

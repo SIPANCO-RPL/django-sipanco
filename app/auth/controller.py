@@ -15,6 +15,9 @@ def index(request):
 
 @methods(["GET", "POST"])
 def login(request: HttpRequest):
+    if request.user.is_authenticated:
+        return redirect("/")
+    
     if request.method == "POST":
         user = auth_service.login(request)
         if user is not None:
@@ -43,6 +46,9 @@ def register_pasien(request: HttpRequest):
 
 @methods(["GET", "POST"])
 def login_petugas(request: HttpRequest):
+    if request.user.is_authenticated:
+        return redirect("/")
+    
     if request.method == "POST":
         user = auth_service.login(request, tipe="petugas")
         if user is not None:
