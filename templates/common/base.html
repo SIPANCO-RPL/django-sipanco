@@ -179,7 +179,9 @@
               <div class="dropdown">
                 <a href="" class="nav-link">Dokter</a>
                 <div class="dropdown-content">
+                  {% if user.is_authenticated and user.petugas %}
                   <a href="/rumah-sakit/create-jadwal">Membuat Jadwal Dokter</a>
+                  {% endif %}
                   <a href="/rumah-sakit/listappointment">Melihat Appointment Dokter</a>
                 </div>
               </div>

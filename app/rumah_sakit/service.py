@@ -41,6 +41,12 @@ class RumahSakitService:
             return self.rumah_sakit_accessor.get_ruangan_by_rumah_sakit(user.rumah_sakit)
         
         return self.rumah_sakit_accessor.get_all_ruangan()
+    
+    def create_jadwal_dokter(self, request: HttpRequest) -> Optional[JadwalDokter]:
+        data_form = request.POST
+        obj_rs = request.user.petugas.rumah_sakit
+        new_jadwal = self.rumah_sakit_accessor.create_jadwal(data_form, obj_rs)
+        return new_jadwal
 
     def create_appointment_dokter(self, request: HttpRequest) -> Optional[AppointmentDokter]:
         user = self.auth_service.get_user(request)

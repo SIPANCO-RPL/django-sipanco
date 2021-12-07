@@ -26,8 +26,22 @@ def lihat_ruangan(request: HttpRequest):
     context = {"list_ruangan": rumah_sakit_service.get_all_ruangan(request)}
     return render(request, 'list_ruangan.html', context)
 
-def create_jadwal_dokter(request):
-    return render(request, 'create_jadwal_dokter.html')
+@methods(["GET", "POST"])
+def create_jadwal_dokter(request):  
+        if not request.user.is_authenticated:
+            return redirect("/")
+
+        if request.user.petugas is None:
+            return redirect("/")
+
+        if request.method == "POST":
+            jadwal_baru = rumah_sakit_service.create_jadwal_dokter(request)
+            if jadwal_baru is not None:
+                return render(request, 'rumah_sakit/create_jadwal_dokter.html', {"success": "success"})
+            
+            return render(request, 'rumah_sakit/create_jadwal_dokter.html', {"failed": "failed"})
+        
+        return render(request, 'rumah_sakit/create_jadwal_dokter.html')
 
 @methods(["GET", "POST"])
 def create_ruangan(request: HttpRequest):
