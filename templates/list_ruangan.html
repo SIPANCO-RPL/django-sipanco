@@ -14,6 +14,7 @@
       <div class="w-1/6 bg-red-500 px-3 h-1 rounded-xl" />
   </div>
 </div>
+{% if list_ruangan %}
 <table class="table">
   <thead>
     <tr>
@@ -36,4 +37,7 @@
     {% endfor %}
   </tbody>
 </table>
+{% else %}
+<h1 style="font-weight: 700; font-size: 2rem;">Belum ada ruangan yang terdaftar</h1>
+{% endif %}
 {% endblock content %}
