@@ -10,6 +10,7 @@
     </div>
   <br>
     <table class="table">
+      {% if reservasi_list|length %}
         <thead>
           <tr>
             <th scope="col"></th>
@@ -17,6 +18,7 @@
             <th scope="col">Kode Reservasi</th>
             <th scope="col">Rumah Sakit</th>
             <th scope="col">Jadwal</th>
+            <th scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -26,11 +28,19 @@
             <td>{{r.pasien.nama}}</td>
             <td>{{r.kode}}</td>
             <td>{{r.jadwal_vaksin.rumah_sakit.nama}}</td>
-            <td>{{r.jadwal_vaksin.waktu}}</td>
+            <td>{{r.jadwal_vaksin.tanggal}} - {{r.jadwal_vaksin.waktu}}</td>
+            <td>{{r.status}}</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
+    {% elif request.user.is_authenticated %}
+    <h2> Kamu tidak memiliki reservasi vaksin</h2>
+    <h3>Silakan buat reservasi vaksin terlebih dahulu</h3>
+    {% else %}
+    <h2> Kamu belum login, silakan login</h2>
+    <a href="/login">Login Pengguna</a>
+    {% endif %}
       <style>
         h2{
           text-align: center; 

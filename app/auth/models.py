@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 
 class Pasien(models.Model):
+    MAX_VAKSIN = 2
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="pasien")
     nama = models.CharField(max_length=128, null=False)
     no_ktp = models.CharField(max_length=32, default="")

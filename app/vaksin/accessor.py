@@ -8,7 +8,7 @@ class ReservasiVaksinAccessor:
     def __init__(self) -> None:
         pass
 
-    def get_reservasi_vaksin(
+    def get_list(
         self,
         pasien_id: Optional[int] = None,
         rs_id: Optional[int] = None,
@@ -16,11 +16,19 @@ class ReservasiVaksinAccessor:
         queryset = ReservasiVaksin.objects.all()
 
         if pasien_id:
-            queryset.filter(pasien__id=pasien_id)
+            queryset = queryset.filter(pasien__id=pasien_id)
 
         if rs_id:
-            queryset.filter(jadwal_vaksin__rumah_sakit__id=rs_id)
+            queryset = queryset.filter(jadwal_vaksin__rumah_sakit__id=rs_id)
 
+        return queryset
+
+    def get_valid_by_pasien(
+        self,
+        pasien_id: int,
+    ) -> List[ReservasiVaksin]:
+        queryset = ReservasiVaksin.objects.all()
+        queryset = queryset.filter(pasien__id=pasien_id).exclude(status="BATAL")
         return queryset
 
     def create(
@@ -30,7 +38,8 @@ class ReservasiVaksinAccessor:
             obj = ReservasiVaksin(**dict_data)
             obj.save()
             return obj
-        except:
+        except Exception as e:
+            print(e)
             return None
 
 
@@ -41,7 +50,7 @@ class JadwalVaksinAccessor:
     def get_by_rs(self, rs_id) -> List[JadwalVaksin]:
         queryset = JadwalVaksin.objects.all()
         
-        queryset.filter(rumah_sakit__id=rs_id)
+        queryset = queryset.filter(rumah_sakit__id=rs_id)
 
         return queryset
 
