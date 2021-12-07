@@ -1,12 +1,15 @@
 from django.http.request import HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from app.auth.models import Petugas
+from app.auth.service import AuthService
 from app.di import injector
 from django.views.decorators.http import require_http_methods as methods
 
 from app.rumah_sakit.service import RumahSakitService
 
 rumah_sakit_service = injector.get(RumahSakitService)
+auth_service = injector.get(AuthService)
 
 @methods(["GET"])
 def lihat_rumah_sakit(request):
@@ -45,13 +48,18 @@ def create_jadwal_dokter(request):
 
 @methods(["GET", "POST"])
 def create_ruangan(request: HttpRequest):
+    if not request.user.is_authenticated:
+        return redirect("/")
+
+    if not isinstance(auth_service.get_user(request), Petugas):
+        return redirect("/")
+
     if request.method == "POST":
         ruangan = rumah_sakit_service.create_ruangan(request)
         if ruangan:
-            return redirect("/rumah-sakit/lihat-ruangan/")
+            return render(request, 'create_ruangan.html', {"success": "success"})
        
-        context = {"message": "Ruangan gagal dibuat"}
-        return render(request, 'list_ruangan.html', context)
+        return render(request, 'create_ruangan.html', {"failed": "failed"})
 
     return render(request, 'create_ruangan.html')
 

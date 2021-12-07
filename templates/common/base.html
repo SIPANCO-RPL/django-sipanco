@@ -171,7 +171,9 @@
                 <div class="dropdown-content">
                   <a href="/rumah-sakit">List Rumah Sakit</a>
                   <a href="/rumah-sakit/lihat-ruangan">Lihat Ruangan</a>
+                  {% if user.is_authenticated and user.petugas %}
                   <a href="/rumah-sakit/buat-ruangan">Buat Ruangan</a>
+                  {% endif %}
                 </div>
               </div>
             </li>
