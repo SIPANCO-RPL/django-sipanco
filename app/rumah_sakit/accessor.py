@@ -28,14 +28,28 @@ class RumahSakitAccessor:
 
     def get_ruangan_by_rumah_sakit(self, rumah_sakit: RumahSakit) -> List[Ruangan]:
         return Ruangan.objects.filter(rumahSakit=rumah_sakit)
+
+    def get_jadwal_by_rumah_sakit(self, rumah_sakit: RumahSakit) -> List[AppointmentDokter]:
+        return AppointmentDokter.objects.filter(jadwal_dokter__rumahsakit=rumah_sakit)
     
-    def get_appointment_dokter(
-        self, pasien_id: Optional[int] = None
+    def get_by_id(self, id) -> Optional[JadwalDokter]:
+        try:
+            return JadwalDokter.objects.get(pk=id)
+        except:
+            return None
+    
+    def get_appointment_list(
+        self,
+        pasien_id: Optional[int] = None,
+        rs_id: Optional[int] = None,
     ) -> List[AppointmentDokter]:
         queryset = AppointmentDokter.objects.all()
 
         if pasien_id:
-            queryset.filter(pasien__id=pasien_id)
+            queryset = queryset.filter(pasien__id=pasien_id)
+
+        if rs_id:
+            queryset = queryset.filter(jadwal_dokter__id=rs_id)
 
         return queryset
     
