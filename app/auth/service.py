@@ -44,12 +44,13 @@ class AuthService:
         '''
         user = request.user
 
+        if user.is_superuser:
+            return user
+
         if not user.is_authenticated:
             return None
-        
-        if isinstance(user, Petugas):
-            return user.petugas
-        return user.pasien
+
+        return getattr(user, 'petugas', None) or getattr(user, 'pasien', None)
     
     def logout(self, request: HttpRequest):
         logout(request)
