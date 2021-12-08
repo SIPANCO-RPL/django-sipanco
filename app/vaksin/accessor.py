@@ -78,6 +78,3 @@ class JadwalVaksinAccessor:
 
     def get_all_jadwalVaksin(self) -> List[JadwalVaksin]:
         return JadwalVaksin.objects.all()
-
-    # def get_jadwalVaksin_by_petugas(self, kode: str) -> List[JadwalVaksin]:
-    #     return JadwalVaksin.objects.filter(rumahSakit__id = kode)
