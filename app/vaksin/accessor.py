@@ -1,3 +1,4 @@
+from datetime import time, date
 from typing import Any, Dict, List, Optional
 from django.db.models import F
 
@@ -65,3 +66,16 @@ class JadwalVaksinAccessor:
             return JadwalVaksin.objects.get(pk=id)
         except:
             return None
+
+    def create_vaksin(self, date: date, waktu: time, kuota: int) -> Optional[JadwalVaksin]:
+        try:
+            jadwalVaksin = JadwalVaksin.objects.create(date=date, waktu=time, kuota=0)
+            return jadwalVaksin
+        except:
+            return None
+
+    def get_all_jadwalVaksin(self) -> List[JadwalVaksin]:
+        return JadwalVaksin.objects.all()
+
+    # def get_jadwalVaksin_by_petugas(self, kode: str) -> List[JadwalVaksin]:
+    #     return JadwalVaksin.objects.filter(rumahSakit__id = kode)
