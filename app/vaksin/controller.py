@@ -28,9 +28,9 @@ def create_vaksin(request: HttpRequest):
     return render(request, 'addVaksin.html')
 
 @methods(["GET"])
-def list_vaksin(request: HttpRequest):
-    vaksin_list = vaksin_service.get_reservasi_list(request)
-    return render(request, 'showVaksin.html', {'vaksin_list': vaksin_list})
+def lihat_ruangan(request: HttpRequest):
+    context = {"showVaksin": vaksin_service.get_all_vaksin(request)}
+    return render(request, 'showVaksin.html', context)
 
 
 @methods(["GET"])

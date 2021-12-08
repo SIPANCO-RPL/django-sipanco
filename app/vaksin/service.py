@@ -107,3 +107,14 @@ class VaksinService:
         if isinstance(user, Petugas):
             jadwal = self.rumah_sakit_accessor.create_jadwal(request.POST["tanggal"], request.POST["waktu"], request.POST["kuota"], request.user.petugas.rumah_sakit)
             return jadwal
+
+    def get_all_vaksin(self, request: HttpRequest) -> List[JadwalVaksin]:
+        user = self.auth_service.get_user(request)
+
+        if not user:
+            return self.rumah_sakit_accessor.get_all_vaksin()
+
+        if isinstance(user, Petugas):
+            return self.rumah_sakit_accessor.get_all_vaksin()
+
+        return self.rumah_sakit_accessor.get_all_vaksin()
