@@ -82,7 +82,6 @@ class VaksinService:
         }
 
 
-
     def get_reservasi_list(self, request: HttpRequest) -> List[ReservasiVaksin]:
         user = self.auth_service.get_user(request)
 
@@ -98,3 +97,13 @@ class VaksinService:
             return self.reservasi_vaksin_accessor.get_list(rs_id=rs_id)
 
         return []
+
+    def create_jadwal(self, request: HttpRequest) -> Optional[JadwalVaksin]:
+        user = self.auth_service.get_user(request)
+
+        if not user:
+            return None
+
+        if isinstance(user, Petugas):
+            jadwal = self.rumah_sakit_accessor.create_jadwal(request.POST["tanggal"], request.POST["waktu"], request.POST["kuota"], request.user.petugas.rumah_sakit)
+            return jadwal

@@ -1,24 +1,29 @@
 from django.http.request import HttpRequest
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from app.auth.service import AuthService
 from django.views.decorators.http import require_http_methods as methods
-
+from app.auth.models import Petugas
 from app.di import injector
 from .service import VaksinService
 
 
 vaksin_service = injector.get(VaksinService)
+auth_service = injector.get(AuthService)
 
 @methods(["GET", "POST"])
 def create_vaksin(request: HttpRequest):
-    if request.method == "POST":
-        jadwalVaksin = vaksin_service.create_vaksin(request)
-        if not jadwalVaksin:
-            context = {"message": "Jadwal vaksin gagal ditambah"}
-            return render(request, 'addVaksin.html', context)
+    if not request.user.is_authenticated:
+        return redirect("/")
 
-        context = {"message": "Jadwal vaksin berhasil ditambah"}
-        return render('addVaksin.html', context)
+    if not isinstance(auth_service.get_user(request), Petugas):
+        return redirect("/")
+
+    if request.method == "POST":
+        vaksin = vaksin_service.create_vaksin(request)
+        if vaksin:
+            return render(request, 'addVaksin.html', {"success": "success"})
+
+        return render(request, 'addVaksin.html', {"failed": "failed"})
 
     return render(request, 'addVaksin.html')
 

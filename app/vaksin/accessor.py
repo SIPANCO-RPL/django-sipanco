@@ -69,8 +69,7 @@ class JadwalVaksinAccessor:
 
     def create_vaksin(self, date: date, waktu: time, kuota: int) -> Optional[JadwalVaksin]:
         try:
-            jadwalVaksin = JadwalVaksin(date, waktu, kuota, 0)
-            jadwalVaksin.save()
+            jadwalVaksin = JadwalVaksin.objects.create(date=date, waktu=time, kuota=0)
             return jadwalVaksin
         except:
             return None
@@ -78,5 +77,5 @@ class JadwalVaksinAccessor:
     def get_all_jadwalVaksin(self) -> List[JadwalVaksin]:
         return JadwalVaksin.objects.all()
 
-    def get_jadwalVaksin_by_petugas(self, kode: str) -> List[JadwalVaksin]:
-        return JadwalVaksin.objects.filter(rumahSakit__id = kode)
+    # def get_jadwalVaksin_by_petugas(self, kode: str) -> List[JadwalVaksin]:
+    #     return JadwalVaksin.objects.filter(rumahSakit__id = kode)
