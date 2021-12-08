@@ -4,17 +4,19 @@ from app.auth.models import Petugas, Pasien
 
 from app.auth.service import AuthService
 from app.rumah_sakit.models import Ruangan, RumahSakit
-from app.rumah_sakit.accessor import RumahSakitAccessor
+from app.rumah_sakit.accessor import RumahSakitAccessor, JadwalDokterAccessor, AppointmentDokterAccessor
 from injector import inject
 from app.rumah_sakit.models import JadwalDokter, AppointmentDokter
 
 
 class RumahSakitService:
     @inject
-    def __init__(self, auth_service: AuthService, rumah_sakit_accessor: RumahSakitAccessor) -> None:
+    def __init__(self, auth_service: AuthService, rumah_sakit_accessor: RumahSakitAccessor, jadwal_dokter_accessor: JadwalDokterAccessor, appointment_dokter_accessor: AppointmentDokterAccessor) -> None:
         self.auth_service = auth_service
         self.rumah_sakit_accessor = rumah_sakit_accessor
-    
+        self.jadwal_dokter_accessor = jadwal_dokter_accessor
+        self.appointment_dokter_accessor = appointment_dokter_accessor
+
     def create_ruangan(self, request: HttpRequest) -> Optional[Ruangan]:
         user = self.auth_service.get_user(request)
 
@@ -54,13 +56,13 @@ class RumahSakitService:
         if not isinstance(user, Pasien):
             return None
 
-        jadwal = self.rumah_sakit_accessor.get_by_id(jadwaldokter_id)
+        jadwal = self.jadwal_dokter_accessor.get_by_id(jadwaldokter_id)
         data = {
             'jadwal_dokter': jadwal,
             'pasien': user,
             'keluhan': request.POST["keluhan"]
         }
-        return self.rumah_sakit_accessor.create_appointment(data)
+        return self.appointment_dokter_accessor.create_appointment(data)
         
 
     def get_appointment_dokter(self, request: HttpRequest) -> List[AppointmentDokter]:
@@ -68,11 +70,7 @@ class RumahSakitService:
         print("test")
 
         if isinstance(user, Pasien):
-            # print(user)
-            return self.rumah_sakit_accessor.get_appointment_list(pasien_id=user.id)
+            return self.appointment_dokter_accessor.get_appointment_list(pasien_id=user.id)
 
         if isinstance(user, Petugas):
-            print("test2")
-            rs_id = user.rumah_sakit
-            print(rs_id)
-            return self.rumah_sakit_accessor.get_jadwal_by_rumah_sakit(user.rumah_sakit)
+            return self.appointment_dokter_accessor.get_appointment_by_rumah_sakit(user.rumah_sakit)

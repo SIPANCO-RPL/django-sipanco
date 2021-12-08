@@ -28,15 +28,32 @@ class RumahSakitAccessor:
 
     def get_ruangan_by_rumah_sakit(self, rumah_sakit: RumahSakit) -> List[Ruangan]:
         return Ruangan.objects.filter(rumahSakit=rumah_sakit)
-
-    def get_jadwal_by_rumah_sakit(self, rumah_sakit: RumahSakit) -> List[AppointmentDokter]:
-        return AppointmentDokter.objects.filter(jadwal_dokter__rumahsakit=rumah_sakit)
     
+    def create_jadwal(self, dict_data: Dict[str, Any], obj_rs: RumahSakit
+    ) -> Optional[JadwalDokter]:
+        try:
+            new_jadwal = JadwalDokter(kode=dict_data["kode"], nama=dict_data["nama"], spesialis=dict_data["spesialis"], jadwal=dict_data["jadwal"], rumahsakit=obj_rs)
+            new_jadwal.save()
+            return new_jadwal
+        except:
+            return None
+
+class JadwalDokterAccessor:
+    def __init__(self) -> None:
+        pass
+
     def get_by_id(self, id) -> Optional[JadwalDokter]:
         try:
             return JadwalDokter.objects.get(pk=id)
         except:
             return None
+
+class AppointmentDokterAccessor:
+    def __init__(self) -> None:
+        pass
+    
+    def get_appointment_by_rumah_sakit(self, rumah_sakit: RumahSakit) -> List[AppointmentDokter]:
+        return AppointmentDokter.objects.filter(jadwal_dokter__rumahsakit=rumah_sakit)
     
     def get_appointment_list(
         self,
@@ -53,15 +70,6 @@ class RumahSakitAccessor:
 
         return queryset
     
-    def create_jadwal(self, dict_data: Dict[str, Any], obj_rs: RumahSakit
-    ) -> Optional[JadwalDokter]:
-        try:
-            new_jadwal = JadwalDokter(kode=dict_data["kode"], nama=dict_data["nama"], spesialis=dict_data["spesialis"], jadwal=dict_data["jadwal"], rumahsakit=obj_rs)
-            new_jadwal.save()
-            return new_jadwal
-        except:
-            return None
-
     def create_appointment(
         self, dict_data: Dict[str, Any]
     ) -> Optional[AppointmentDokter]:
