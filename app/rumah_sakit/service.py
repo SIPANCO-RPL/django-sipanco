@@ -48,29 +48,31 @@ class RumahSakitService:
         new_jadwal = self.rumah_sakit_accessor.create_jadwal(data_form, obj_rs)
         return new_jadwal
 
-    def create_appointment_dokter(self, request: HttpRequest) -> Optional[AppointmentDokter]:
+    def create_appointment_dokter(self, request: HttpRequest, jadwaldokter_id: int) -> Optional[AppointmentDokter]:
         user = self.auth_service.get_user(request)
 
-        if not user:
+        if not isinstance(user, Pasien):
             return None
 
-        if isinstance(user, Pasien):
-            data = request.POST
-            return self.rumah_sakit_accessor.create_appointment(data)
+        jadwal = self.rumah_sakit_accessor.get_by_id(jadwaldokter_id)
+        data = {
+            'jadwal_dokter': jadwal,
+            'pasien': user,
+            'keluhan': request.POST["keluhan"]
+        }
+        return self.rumah_sakit_accessor.create_appointment(data)
         
 
     def get_appointment_dokter(self, request: HttpRequest) -> List[AppointmentDokter]:
         user = self.auth_service.get_user(request)
-
-        if not user:
-            return None
+        print("test")
 
         if isinstance(user, Pasien):
-            return self.rumah_sakit_accessor.get_appointment_dokter(pasien_id=user.id)
+            # print(user)
+            return self.rumah_sakit_accessor.get_appointment_list(pasien_id=user.id)
 
         if isinstance(user, Petugas):
-            # get rumah sakit dari petugas -> get reservasi vaksin dari jadwal yg ada di rumah sakit
-            pass
-
-        return self.rumah_sakit_accessor.get_appointment_dokter()
-        
+            print("test2")
+            rs_id = user.rumah_sakit
+            print(rs_id)
+            return self.rumah_sakit_accessor.get_jadwal_by_rumah_sakit(user.rumah_sakit)

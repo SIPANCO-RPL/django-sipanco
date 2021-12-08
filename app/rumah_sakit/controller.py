@@ -66,16 +66,32 @@ def create_ruangan(request: HttpRequest):
 @methods(["GET"])
 def list_appointment(request: HttpRequest):
     appointment_list = rumah_sakit_service.get_appointment_dokter(request)
+    print(appointment_list)
     return render(request, 'list_appointment.html', {'appointment_list': appointment_list})
 
 @methods(["GET", "POST"])
-def create_appointment(request: HttpRequest):
+def create_appointment(request: HttpRequest, jadwaldokter_id: int):
+
+    context = {
+        "data": None,
+        "is_valid": False,
+        "success": False,
+        "message": "",
+    }
     if request.method == "POST":
-        reservasi = rumah_sakit_service.create_appointment_dokter(request)
-        if not reservasi:
-            context = {"message": "Gagal Membuat Reservasi"}
+        appointment = rumah_sakit_service.create_appointment_dokter(request, jadwaldokter_id)
+        if not appointment:
+            context["message"] = "Gagal Membuat Appointment"
+            context["success"] = False
+
             return render(request, 'create_appointment.html', context)
 
-        return reverse(list_appointment)
+        context["message"] = "Sukses Membuat Appointment dengan Dokter"
+        context["success"] = True
+        return render(request, 'create_appointment.html', context)
+    
+    # data = vaksin_service.get_create_reservasi(request, jadwal_id)
+    # context['data'] = data
+    # context['is_get'] = True
 
-    return render(request, 'create_appointment.html')
+    return render(request, 'create_appointment.html', context)
