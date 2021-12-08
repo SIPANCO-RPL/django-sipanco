@@ -1,43 +1,43 @@
 {% extends "common/base.html" %}
-{% block content %}
+
+{% load static %}
+
+{% block style %}
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Jadwal Vaksin | SIPANCO</title>
+{% endblock style %}
+
+{% block content %}
     <div class="container mx-auto mt-32" style="max-width: 768px;">
-        <div class="flex flex-col items-center md:items-start">
-            <h1 class="mb-2 text-3xl sm:text-4xl">List Jadwal Vaksin</h1>
-            <div class="w-1/12 bg-red-500 px-3 h-1 rounded-xl" />
+        <div class="flex flex-col items-center md:items-start mb-8">
+            <h1 class="mb-2 text-3xl sm:text-4xl">Jadwal Vaksin</h1>
+            <div class="w-1/6 bg-red-500 px-3 h-1 rounded-xl" />
         </div>
-    <div class="container mx-auto mt-20">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">Tanggal</th>
-            <th scope="col">Waktu</th>
-            <th scope="col">Kuota</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>12/13/2021</td>
-            <td>11:11 PM</td>
-            <td>10</td>
-            <td>
-                <button type="submit" class="btn btn-outline-danger">Reservasi Jadwal</button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>12/13/2021</td>
-            <td>11:11 PM</td>
-            <td>10</td>
-            <td>
-                <button type="submit" class="btn btn-outline-danger">Reservasi Jadwal</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
     </div>
+    {% if list_vaksin %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Waktu</th>
+                <th scope="col">Kuota</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for vaksin in list_vaksin %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ vaksin.tanggal }}</td>
+                    <td>{{ vaksin.waktu }}</td>
+                    <td>{{ vaksin.kuota }}</td>
+                    {% if auth. %}
+                    <td><a href="reservasi/create/{{ vaksin.id }}"><button type="submit" class="btn btn-outline-danger">Reservasi Jadwal</button></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1 style="font-weight: 700; font-size: 2rem;">Belum ada adwal vaksin yang tersedia</h1>
+    {% endif %}
 {% endblock content %}

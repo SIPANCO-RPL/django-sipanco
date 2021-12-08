@@ -19,8 +19,8 @@ def create_vaksin(request: HttpRequest):
         return redirect("/")
 
     if request.method == "POST":
-        vaksin = vaksin_service.create_vaksin(request)
-        if vaksin:
+        jadwalVaksin = vaksin_service.create_vaksin(request)
+        if jadwalVaksin:
             return render(request, 'addVaksin.html', {"success": "success"})
 
         return render(request, 'addVaksin.html', {"failed": "failed"})
@@ -29,8 +29,8 @@ def create_vaksin(request: HttpRequest):
 
 @methods(["GET"])
 def list_vaksin(request: HttpRequest):
-    vaksin_list = vaksin_service.get_reservasi_list(request)
-    return render(request, 'showVaksin.html', {'vaksin_list': vaksin_list})
+    context = {"list_vaksin": vaksin_service.get_all_vaksin(request)}
+    return render(request, 'showVaksin.html', context)
 
 
 @methods(["GET"])
