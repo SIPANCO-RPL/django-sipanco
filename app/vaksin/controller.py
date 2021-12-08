@@ -36,7 +36,6 @@ def list_vaksin(request: HttpRequest):
 @methods(["GET"])
 def list_reservasi_vaksin(request: HttpRequest):
     reservasi_list = vaksin_service.get_reservasi_list(request)
-    print(reservasi_list)
     return render(request, 'list-reservasi.html', {'reservasi_list': reservasi_list})
 
 

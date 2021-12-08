@@ -31,8 +31,9 @@
                     <td>{{ vaksin.tanggal }}</td>
                     <td>{{ vaksin.waktu }}</td>
                     <td>{{ vaksin.kuota }}</td>
-                    {% if auth. %}
+                    {% if request.user.is_authenticated and user.pasien %}
                     <td><a href="reservasi/create/{{ vaksin.id }}"><button type="submit" class="btn btn-outline-danger">Reservasi Jadwal</button></a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
