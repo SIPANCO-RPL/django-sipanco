@@ -33,7 +33,7 @@
         </tbody>
       </table>
     {% elif request.user.is_authenticated and user.pasien %}
-    <h2 style="margin-top: 70px;">Anda belum membuat appointment dengan dokter. Silakan membuatnya terlebih dahulu.</h2>
+    <h2 style="margin-top: 70px;">Pasien belum membuat appointment dengan dokter</h2>
     {% elif request.user.is_authenticated and user.petugas %}
     <h2 style="margin-top: 70px;">Belum ada pasien yang membuat appointment dengan dokter.</h2>
     {% else %}
