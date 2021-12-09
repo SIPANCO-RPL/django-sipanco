@@ -1,0 +1,51 @@
+{% extends 'common/base.html' %}
+
+{% load static %}
+{% load my_tags %}
+
+{% block style %}
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<title>Rumah Sakit | SIPANCO</title>
+{% endblock style %}
+
+{% block content %}
+<div class="container mx-auto mt-40">
+    <h1 class="text-3xl">List Rumah Sakit</h1>
+    <div class="bg-red-500 px-3 h-1 rounded-xl" style="width: 120px;" />
+</div>
+
+<div
+    class="flex flex-wrap flex-col sm:flex-row items-center justify-center lg:justify-start gap-10 md:gap-16 xl:gap-20 2xl:gap-24 my-12 container mx-auto">
+
+    {% for obj in list_rumah_sakit %}
+    <a href="{% url 'app:rumah_sakit:lihat_jadwal_dokter' num=obj.id %}"
+        class="flex-initial w-5/6 sm:w-1/3 lg:w-1/5 xl:w-1/5 relative cursor-pointer" style="text-decoration: none;">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-md">
+            {% if forloop.counter|modulo:5 == 0 %}
+            <img src="{% static 'img/hospital-0.jpeg' %}" alt="gambar rumah sakit" class="w-full h-64 object-cover" />
+            {% elif forloop.counter|modulo:5 == 1 %}
+            <img src="{% static 'img/hospital-1.jpeg' %}" alt="gambar rumah sakit" class="w-full h-64 object-cover" />
+            {% elif forloop.counter|modulo:5 == 2 %}
+            <img src="{% static 'img/hospital-2.jpeg' %}" alt="gambar rumah sakit" class="w-full h-64 object-cover" />
+            {% elif forloop.counter|modulo:5 == 3 %}
+            <img src="{% static 'img/hospital-3.jpeg' %}" alt="gambar rumah sakit" class="w-full h-64 object-cover" />
+            {% elif forloop.counter|modulo:5 == 4 %}
+            <img src="{% static 'img/hospital-4.jpeg' %}" alt="gambar rumah sakit" class="w-full h-64 object-cover" />
+            {% endif %}
+            <div class="m-4">
+                <h1 class="font-bold text-red-500 truncate">
+                    {{ obj.nama }}
+                </h1>
+                <h1 class="block text-gray-500 text-sm font-bold">
+                    {{ obj.alamat }}
+                </h1>
+                <h1 class="block text-gray-500 text-sm">
+                    {{ obj.kota }}
+                </h1>
+
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock content %}

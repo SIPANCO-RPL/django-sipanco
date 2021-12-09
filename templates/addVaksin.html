@@ -1,33 +1,59 @@
-{% extends "common/base.html" %}
-{% block content %}
+{% extends 'common/base.html' %}
+
+{% load static %}
+
+{% block style %}
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Jadwal Vaksin | SIPANCO</title>
+{% endblock style %}
+
+{% block content %}
     <div>
-    <div class="container mx-auto mt-32" style="max-width: 768px;">
-        <div class="flex flex-col items-center md:items-start">
-            <h1 class="mb-2 text-3xl sm:text-4xl">Tambah Jadwal Vaksin</h1>
-            <div class="w-1/12 bg-red-500 px-3 h-1 rounded-xl" />
+        <div class="container mx-auto mt-32" style="max-width: 768px;">
+            <div class="flex flex-col items-center md:items-start">
+                <h1 class="mb-2 text-3xl sm:text-4xl">Tambah Jadwal Vaksin</h1>
+                <div class="w-1/12 bg-red-500 px-3 h-1 rounded-xl" />
+            </div>
         </div>
+        <form class="container mx-auto mt-12 mb-8" style="max-width: 768px;" action="/vaksin/create" method="POST">
+            {% csrf_token %}
+            <div class="flex flex-col space-y-8 rounded-2xl p-7 sm:p-12">
+                <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-start md:justify-between items-start md:items-center">
+                    <h1>Tanggal</h1>
+                    <input required type="date" name="tanggal" class="py-2 px-3 border-b-2 border-red-500 w-full md:w-96 focus:outline-none focus:shadow-lg" />
+                </div>
+                <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-start md:justify-between items-start md:items-center">
+                    <h1>Waktu</h1>
+                    <input required type="time" name="waktu" class="py-2 px-3 border-b-2 border-red-500 w-full md:w-96 focus:outline-none focus:shadow-lg" />
+                </div>
+                <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-start md:justify-between items-start md:items-center">
+                    <h1>Kuota</h1>
+                    <input required type="number" name="kuota" placeholder="Masukkan jumlah kuota" class="py-2 px-3 border-b-2 border-red-500 w-full md:w-96 focus:outline-none focus:shadow-lg" />
+                </div>
+                <div class="flex flex-col md:flex-row space-x-0 md:space-x-4 space-y-4 md:space-y-0 items-center justify-center pt-6">
+                    <input class="px-6 py-2 text-center bg-red-500 rounded-xl text-white hover:no-underline hover:shadow-lg w-full md:w-auto text-center" type="submit" id="btnsubmit" value="Tambah Jadwal Vaksin" />
+                </div>
+            </div>
+        </form>
     </div>
-<body>
-<form class="container mx-auto mt-8 mb-8" style="max-width: 768px;">
-    <form class="container mx-auto mt-12 mb-8" style="max-width: 768px;">
-        <div class="flex flex-col space-y-8 rounded-2xl p-7 sm:p-12">
-            <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-start md:justify-between items-start md:items-center">
-                <h1>Tanggal</h1>
-                <input required type="date" name="inputDate" class="py-2 px-3 border-b-2 border-red-500 w-full md:w-96 focus:outline-none focus:shadow-lg"/>
-            </div>
-            <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-start md:justify-between items-start md:items-center">
-                <h1>Waktu</h1>
-                <input required type="time" name="inputTime" class="py-2 px-3 border-b-2 border-red-500 w-full md:w-96 focus:outline-none focus:shadow-lg"/>
-            </div>
-            <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row justify-start md:justify-between items-start md:items-center">
-                <h1>Kuota</h1>
-                <input required type="number" name="inputKuota" placeholder="Masukkan jumlah kuota" min="1" class="py-2 px-3 border-b-2 border-red-500 w-full md:w-96 focus:outline-none focus:shadow-lg"/>
-            </div>
-            <div class="flex flex-col md:flex-row space-x-0 md:space-x-4 space-y-4 md:space-y-0 items-center justify-center pt-6">
-                <button class="px-6 py-2 text-center bg-red-500 rounded-xl text-white hover:no-underline hover:shadow-lg w-full md:w-auto text-center" type="submit">Tambah Jadwal Vaksin</button>
-            </div>
-        </div>
-</form>
+    {% if failed %}
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                confirmButtonColor: '#D73A2F',
+                text: 'Jadwal vaksin gagal dibuat',
+            })
+        </script>
+    {% endif %}
+    {% if success %}
+        <script>
+            Swal.fire(
+                'Great!',
+                'Jadwal vaksin berhasil dibuat',
+                'success'
+            )
+            setTimeout(function(){ location.href = '/vaksin'; }, 2000);
+        </script>
+    {% endif %}
 {% endblock content %}

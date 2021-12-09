@@ -15,10 +15,43 @@ def index(request):
 
 @methods(["GET", "POST"])
 def login(request: HttpRequest):
+    if request.user.is_authenticated:
+        return redirect("/")
+    
     if request.method == "POST":
-        return auth_service.login(request)
+        user = auth_service.login(request)
+        if user is not None:
+            return redirect("/")
+        
+        return render(request, "login/login.html", {"error_message": "Password / Username Salah"})
 
-    return auth_service.get_login(request)
+    return render(request, "login/login.html")
 
+@methods(["GET"])
 def logout(request: HttpRequest):
-    pass
+    if request.user.is_authenticated:
+        auth_service.logout(request)
+        return redirect("/")
+
+@methods(["GET", "POST"])
+def register_pasien(request: HttpRequest):
+    if request.method == "POST":
+        user = auth_service.register(request)
+        if (user is not None):
+            return render(request, "register/register.html", {"created_user": user})
+        
+        return render(request, "register/register.html", {"error_message": "terjadi error"})
+    
+    return render(request, "register/register.html")
+
+@methods(["GET", "POST"])
+def login_petugas(request: HttpRequest):
+    if request.user.is_authenticated:
+        return redirect("/")
+    
+    if request.method == "POST":
+        user = auth_service.login(request, tipe="petugas")
+        if user is not None:
+            return redirect("/")
+
+    return render(request, "login/login_petugas.html")

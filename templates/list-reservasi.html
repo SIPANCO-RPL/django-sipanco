@@ -10,35 +10,37 @@
     </div>
   <br>
     <table class="table">
+      {% if reservasi_list|length %}
         <thead>
           <tr>
             <th scope="col"></th>
             <th scope="col">Nama Pasien</th>
+            <th scope="col">Kode Reservasi</th>
             <th scope="col">Rumah Sakit</th>
             <th scope="col">Jadwal</th>
+            <th scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
+          {% for r in reservasi_list%}
           <tr>
-            <th scope="row">1</th>
-            <td>Anjay Gurinjay</td>
-            <td>RS Sentosa</td>
-            <td>12-Dec-2021 17:00-18:00</td>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{r.pasien.nama}}</td>
+            <td>{{r.kode}}</td>
+            <td>{{r.jadwal_vaksin.rumah_sakit.nama}}</td>
+            <td>{{r.jadwal_vaksin.tanggal}} - {{r.jadwal_vaksin.waktu}}</td>
+            <td>{{r.status}}</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Anjay Gurinjay1</td>
-            <td>RS Sejahtera</td>
-            <td>12-Dec-2021 17:00-18:00</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Anjay Gurinjay2</td>
-            <td>RS Sentosa</td>
-            <td>12-Dec-2021 17:00-18:00</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
+    {% elif request.user.is_authenticated %}
+    <h2> Kamu tidak memiliki reservasi vaksin</h2>
+    <h3>Silakan buat reservasi vaksin terlebih dahulu</h3>
+    {% else %}
+    <h2> Kamu belum login, silakan login</h2>
+    <a href="/login">Login Pengguna</a>
+    {% endif %}
       <style>
         h2{
           text-align: center; 

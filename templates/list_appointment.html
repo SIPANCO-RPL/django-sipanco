@@ -1,6 +1,6 @@
 {% extends "common/base.html" %}  
 {% block content %}  
-<title>List Appoinment | SIPANCO</title>
+<title>List Appointment Dokter | SIPANCO</title>
     <br>
     <div class="container mx-auto mt-32" style="max-width: 768px;">
       <div class="flex flex-col items-center md:items-start mb-8">
@@ -10,6 +10,7 @@
     </div>
   <br>
     <table class="table">
+      {% if appointment_list %}
         <thead>
           <tr>
             <th scope="col"></th>
@@ -20,29 +21,24 @@
           </tr>
         </thead>
         <tbody>
+          {% for r in appointment_list%}
           <tr>
-            <th scope="row">1</th>
-            <td>Dr. Mark</td>
-            <td>Anak</td>
-            <td>12-Dec-2021 17:00-18:00</td>
-            <td>Sakit perut</td>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{r.jadwal_dokter.nama}}</td> 
+            <td>{{r.jadwal_dokter.spesialis}}</td>
+            <td>{{r.jadwal_dokter.jadwal}}</td>
+            <td>{{r.keluhan}}</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Dr. Yusuf</td>
-            <td>Mata</td>
-            <td>12-Dec-2021 17:00-18:00</td>
-            <td>Mata buram</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Drg. Anna</td>
-            <td>Gigi</td>
-            <td>12-Dec-2021 17:00-18:00</td>
-            <td>Sakit gigi</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
+    {% elif request.user.is_authenticated and user.pasien %}
+    <h2 style="margin-top: 70px;">Pasien belum membuat appointment dengan dokter</h2>
+    {% elif request.user.is_authenticated and user.petugas %}
+    <h2 style="margin-top: 70px;">Belum ada pasien yang membuat appointment dengan dokter.</h2>
+    {% else %}
+    <h2 style="margin-top: 85px;"> Anda belum melakukan login. Silahkan login <a href="/login" style="color: #ed443b;">disini.</a></h2>
+    {% endif %}
       <style>
         h2{
           text-align: center; 
