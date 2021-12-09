@@ -22,6 +22,8 @@
                 <th scope="col">Tanggal</th>
                 <th scope="col">Waktu</th>
                 <th scope="col">Kuota</th>
+                <th scope="col">Rumah Sakit</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -31,6 +33,7 @@
                     <td>{{ vaksin.tanggal }}</td>
                     <td>{{ vaksin.waktu }}</td>
                     <td>{{ vaksin.kuota }}</td>
+                    <td>{{ vaksin.rumah_sakit }}</td>
                     {% if request.user.is_authenticated and user.pasien %}
                     <td><a href="reservasi/create/{{ vaksin.id }}"><button type="submit" class="btn btn-outline-danger">Reservasi Jadwal</button></a></td>
                     {% endif %}

@@ -115,6 +115,6 @@ class VaksinService:
             return self.jadwal_vaksin_accessor.get_all_jadwalVaksin()
 
         if isinstance(user, Petugas):
-            return self.jadwal_vaksin_accessor.get_all_jadwalVaksin()
+            return self.jadwal_vaksin_accessor.get_vaksin_by_rumah_sakit(user.rumah_sakit)
 
         return self.jadwal_vaksin_accessor.get_all_jadwalVaksin()
